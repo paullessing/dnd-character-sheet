@@ -1,0 +1,14 @@
+<div>
+    <h1>Character Sheet</h1>
+    Name: <input ng-model="vm.character.name"  type="text" />
+
+    <character-detail label="Class"             value="vm.character.details.class"></character-detail>
+    <div>Level: {{ vm.character.level }}</div>
+    <character-detail label="Background"        value="vm.character.details.background"></character-detail>
+    <character-detail label="Player Name"       value="vm.character.details.playerName"></character-detail>
+    <character-detail label="Race"              value="vm.character.details.race"></character-detail>
+    <character-detail label="Alignment"         value="vm.character.details.alignment"></character-detail>
+    <character-detail label="Experience Points" value="vm.character.details.xp" type="number"></character-detail>
+
+    <ability ability="ability" ng-repeat="ability in vm.character.abilities"></ability>
+</div>
