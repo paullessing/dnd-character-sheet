@@ -207,6 +207,7 @@ html {
     line-height: 15px;
     font-size: 13px;
     text-align: center;
+    vertical-align: bottom;
 }
 
 .skills__name {
