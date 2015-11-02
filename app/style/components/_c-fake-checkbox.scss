@@ -1,0 +1,17 @@
+.c-fake-checkbox {
+	> input[type=checkbox] {
+		display: none;
+	}
+}
+.c-fake-checkbox__element {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+
+	border-radius: 50%;
+	border: 2px solid $border-color;
+
+	:checked + & {
+		background-color: #828282;
+	}
+}

@@ -8,7 +8,7 @@
     </div>
     <ul class="o-skills">
         <li ng-repeat="skill in vm.ability.skills" class="o-skills__item">
-            <input type="checkbox" ng-model="skill.isProficient" class="o-skills__proficiency"/>
+            <input fake-checkbox type="checkbox" ng-model="skill.isProficient" class="o-skills__proficiency" />
             <span class="o-skills__modifier">{{ vm.getModifier(skill) | modifier }}</span>
             <span class="o-skills__name">{{ skill.name }}</span>
         </li>

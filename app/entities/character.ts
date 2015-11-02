@@ -30,6 +30,10 @@ module Entities {
             return getLevel(this.details.xp);
         }
 
+        public get xpUntilNextLevel(): number {
+            return getXpRequiredForLevelUp(this.details.xp);
+        }
+
         private getAbility(name): Ability {
             for (var i = 0; i < this.abilities.length; i++) {
                 if (this.abilities[i].name === name) {

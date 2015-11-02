@@ -3,7 +3,7 @@
         <div class="o-header__name">
             <label class="c-inline-field">
                 <span class="c-inline-field__label">Character Name</span>
-                <input class="c-inline-field__field" ng-model="vm.character.name"  type="text" />
+                <input class="c-inline-field__field" ng-model="vm.character.name" type="text"/>
             </label>
         </div>
 
@@ -13,7 +13,7 @@
                                   value="vm.character.details.class"></character-detail>
                 <div class="c-inline-field c-inline-field--small">
                     <span class="c-inline-field__label">Level</span>
-                    <span class="c-inline-field__field">{{ vm.character.level }}</span>
+                    <span class="c-inline-field__field" title="XP until next level: {{ vm.character.xpUntilNextLevel }}">{{ vm.character.level }}</span>
                 </div>
             </div>
             <character-detail class="o-header__detail"
@@ -39,11 +39,11 @@
     <div class="o-page">
         <div class="o-page__column">
             <div class="o-ability-property">
-                <span class="o-ability-property__label">Proficiency Bonus</span>
+                <span class="o-ability-property__label" title="Based on the current level">Proficiency Bonus</span>
                 <span class="o-ability-property__modifier">{{ vm.character.proficiencyBonus | modifier }}</span>
             </div>
             <label class="o-ability-property">
-                <span class="o-ability-property__label">Inspiration</span>
+                <span class="o-ability-property__label" title="Defined by the GM">Inspiration</span>
                 <input class="o-ability-property__modifier" type="text" pattern="[+-]?[0-9]+"/>
             </label>
 
@@ -52,7 +52,8 @@
                      proficiency-bonus="vm.character.proficiencyBonus"></ability>
 
             <div class="o-ability-property">
-                <span class="o-ability-property__label">Passive Wisdom (Perception)</span>
+                <span class="o-ability-property__label"
+                      title="10 + Perception modifier">Passive Wisdom (Perception)</span>
                 <span class="o-ability-property__modifier">{{ vm.character.passiveWisdom }}</span>
             </div>
         </div>

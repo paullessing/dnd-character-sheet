@@ -1,7 +1,7 @@
 .o-ability {
 	background-color: white;
 	display: flex;
-	border: 1px solid #363636;
+	border: 1px solid $border-color;
 	border-radius: 3px;
 	width: 100px;
 	height: 100px;
@@ -22,7 +22,7 @@
 	order: 1;
 	border: none;
 	outline: none;
-	border-bottom: 1px solid #363636;
+	border-bottom: 1px solid $border-color;
 	width: 100%;
 	background: none;
 	text-align: center;
