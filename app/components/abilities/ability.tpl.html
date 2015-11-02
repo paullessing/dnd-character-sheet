@@ -1,9 +1,16 @@
-<div>
-    <input type="text" pattern="[0-9+-]*" ng-model="vm.ability.points" />
-    <div>{{ vm.ability.modifier }}</div>
-    <p>{{ vm.ability.name }}</p>
-
-    <!--<ul>-->
-        <!--<li></li>-->
-    <!--</ul>-->
+<div class="ability-row">
+    <div class="ability">
+        <h3 class="ability__name">{{ vm.ability.name }}</h3>
+        <input type="text" pattern="[0-9+-]*" ng-model="vm.ability.points"
+            class="ability__value"
+        />
+        <p class="ability__modifier">{{ vm.ability.modifier | modifier }}</p>
+    </div>
+    <ul class="skills">
+        <li ng-repeat="skill in vm.ability.skills" class="skills__item">
+            <input type="checkbox" ng-model="skill.isProficient" class="skills__proficiency"/>
+            <span class="skills__modifier">{{ vm.getModifier(skill) | modifier }}</span>
+            <span class="skills__name">{{ skill.name }}</span>
+        </li>
+    </ul>
 </div>

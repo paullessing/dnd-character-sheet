@@ -1,30 +1,215 @@
 /* app css stylesheet */
 
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
-.menu:before {
-  content: "[";
+
+
+html {
+    color: #363636;
+    font-family: serif;
 }
 
-.menu:after {
-  content: "]";
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
 }
 
-.menu > li {
-  display: inline;
+
+.header {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
+.header__name {
+    display: flex;
+    flex-basis: 40%;
+    align-items: center;
 }
 
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
+.header__details {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+}
+
+.header__detail {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 33.33%;
+}
+
+.header__detail > * {
+    flex-grow: 1;
+}
+
+.body {
+    display: flex;
+    flex-direction: row;
+}
+
+.body__column {
+    flex-basis: 25%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+
+.inline-field {
+    display: inline-block;
+    vertical-align: top;
+    min-height: 50px;
+    min-width: 150px;
+    flex-grow: 1;
+    width: 100%;
+    position: relative;
+}
+
+.inline-field--small {
+    min-width: 50px;
+    flex-grow: 0;
+    width: auto;
+}
+
+.inline-field__field {
+    display: block;
+    height: 30px;
+    font-size: 20px;
+    vertical-align: text-bottom;
+    padding: 2px 4px;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #363636;
+    background: none;
+}
+
+.inline-field__label {
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    position: absolute;
+    left: 0;
+    top: 30px;
+    padding: 2px 4px;
+}
+
+.ability-row {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.ability {
+    display: flex;
+    border: 1px solid #363636;
+    border-radius: 3px;
+    width: 100px;
+    height: 100px;
+    position: relative;
+
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.ability__name {
+    order: 3;
+    width: 100%;
+    font-size: 10px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 4px;
+}
+.ability__value {
+    order: 1;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #363636;
+    width: 100%;
+    background: none;
+    text-align: center;
+    padding: 6px 4px;
+}
+.ability__modifier {
+    order: 2;
+    width: 100%;
+    flex-grow: 1;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skills {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.skills__item {
+    margin-bottom: 6px;
+}
+
+.skills__modifier {
+    display: inline-block;
+    border-bottom: 1px solid #363636;
+    padding: 0 4px;
+    min-width: 25px;
+    height: 15px;
+    line-height: 15px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.skills__name {
+    text-transform: uppercase;
+    font-size: 13px;
 }

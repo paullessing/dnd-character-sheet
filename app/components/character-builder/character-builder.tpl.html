@@ -1,14 +1,43 @@
-<div>
+<form>
     <h1>Character Sheet</h1>
-    Name: <input ng-model="vm.character.name"  type="text" />
+    <header class="header">
+        <div class="header__name">
+            <label class="inline-field">
+                <span class="inline-field__label">Name</span>
+                <input class="inline-field__field" ng-model="vm.character.name"  type="text" />
+            </label>
+        </div>
 
-    <character-detail label="Class"             value="vm.character.details.class"></character-detail>
-    <div>Level: {{ vm.character.level }}</div>
-    <character-detail label="Background"        value="vm.character.details.background"></character-detail>
-    <character-detail label="Player Name"       value="vm.character.details.playerName"></character-detail>
-    <character-detail label="Race"              value="vm.character.details.race"></character-detail>
-    <character-detail label="Alignment"         value="vm.character.details.alignment"></character-detail>
-    <character-detail label="Experience Points" value="vm.character.details.xp" type="number"></character-detail>
+        <div class="header__details">
+            <div class="header__detail">
+                <character-detail label="Class"             value="vm.character.details.class"></character-detail>
+                <div class="inline-field inline-field--small">
+                    <span class="inline-field__label">Level</span>
+                    <span class="inline-field__field">{{ vm.character.level }}</span>
+                </div>
+            </div>
+            <character-detail class="header__detail"
+                    label="Background"        value="vm.character.details.background"></character-detail>
+            <character-detail class="header__detail"
+                    label="Player Name"       value="vm.character.details.playerName"></character-detail>
+            <character-detail class="header__detail"
+                    label="Race"              value="vm.character.details.race"></character-detail>
+            <character-detail class="header__detail"
+                    label="Alignment"         value="vm.character.details.alignment" options="vm.alignments"></character-detail>
+            <character-detail class="header__detail"
+                    label="Experience Points" value="vm.character.details.xp" type="number"></character-detail>
+        </div>
+    </header>
 
-    <ability ability="ability" ng-repeat="ability in vm.character.abilities"></ability>
-</div>
+    <div class="body">
+        <div class="body__column">
+            Proficiency Bonus: {{ vm.character.proficiencyBonus | modifier }}
+            <ability ability="ability" ng-repeat="ability in vm.character.abilities" proficiency-bonus="vm.character.proficiencyBonus"></ability>
+            <span>{{ vm.character.passiveWisdom }} Passive Wisdom (Perception)</span>
+        </div>
+
+        <div class="body__column"></div>
+        <div class="body__column"></div>
+    </div>
+
+</form>

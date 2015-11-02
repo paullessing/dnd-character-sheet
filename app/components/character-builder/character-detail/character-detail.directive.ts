@@ -4,7 +4,8 @@ module CharacterBuilder.CharacterDetail {
             scope: {
                 label: "@",
                 value: "=",
-                type: "@"
+                type: "@",
+                options: "="
             },
             restrict: 'E',
             bindToController: true,

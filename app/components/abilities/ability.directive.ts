@@ -4,11 +4,13 @@ module CharacterBuilder.SkillGroup {
     export function SkillGroupDirective() {
         return {
             scope: {
-                ability: '='
+                ability: '=',
+                proficiencyBonus: '='
             },
+            replace: true,
             restrict: 'E',
             bindToController: true,
-            controller: SkillGroupDirectiveController,
+            controller: AbilityDirectiveController,
             controllerAs: 'vm',
             templateUrl: 'components/abilities/ability.tpl.html',
             transclude: true

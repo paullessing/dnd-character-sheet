@@ -1,4 +1,10 @@
-<label>
-    <input ng-model="vm.value" type="{{ vm.type || 'text' }}" />
-    <span>{{ vm.label }}</span>
+<label class="inline-field">
+    <span class="inline-field__label">{{ vm.label }}</span>
+    <input ng-model="vm.value" type="{{ vm.type || 'text' }}" name="{{ vm.label }}"
+           class="inline-field__field" ng-if="!vm.options" />
+    <select ng-model="vm.value" ng-if="vm.options" ng-options="index as choice for (index, choice) in vm.options"
+            class="inline-field__field"
+            ng-change="vm.select()">
+        <option value=""></option>
+    </select>
 </label>

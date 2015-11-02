@@ -1,54 +1,13 @@
 module Entities {
-    export class Character {
-        public name: string;
-        public details: {
-            class?: string;
-            level?: number;
-            background?: string;
-            playerName?: string;
-            race?: string;
-            alignment?: string;
-            xp: number;
-        } = {
-            xp: 0
-        };
-        public abilities = {
-            strength: new Ability(this, 'Strength'),
-            dexterity: new Ability(this, 'Dexterity'),
-            constitution: new Ability(this, 'Constitution'),
-            intelligence: new Ability(this, 'Intelligence'),
-            wisdom: new Ability(this, 'Wisdom'),
-            charisma: new Ability(this, 'Charisma')
-        }
-
-        public get level(): number {
-            return getLevel(this.details.xp);
-        }
-    }
-
-    var xpToLevel = [
-        0, 300, 900, 2700, 6500, 14000, 23000, 34000, 48000, 64000, 85000, 100000, 120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000
-    ];
-
-    export function getLevel(xp: number) {
-        for (var level = xpToLevel.length - 1; level >= 0; level--) {
-            if (xp >= xpToLevel[level]) {
-                return level + 1;
-            }
-        }
-        return 1; // Cannot be less than level 1
-    }
-
-    export function getXpRequiredForLevelUp(xp) {
-        return xpToLevel[getLevel(xp)] - xp;
-    }
-
     export class Ability {
-        constructor(private character: Character, public name: string) {}
+        constructor(public name: string, ...skills: string[]) {
+            this._skills = [new Skill("Saving Throws")].concat(skills.map(name => new Skill(name)));
+        }
 
         private _pointsString: string;
         private _points: number;
-        private _modifier: number
+        private _modifier: number;
+        private _skills: Skill[];
 
         public set points(points: string) {
             if (points === this._pointsString) {
@@ -96,5 +55,24 @@ module Entities {
         public get modifier(): number {
             return this._modifier;
         }
+
+        public get skills(): Skill[] {
+            return this._skills;
+        }
+
+        public getSkill(name: string): Skill {
+            for (var i = 0; i < this._skills.length; i++) {
+                if (this._skills[i].name === name) {
+                    return this._skills[i];
+                }
+            }
+            return null;
+        }
+    }
+
+    export class Skill {
+        constructor(public name: string) {}
+
+        public isProficient: boolean = false;
     }
 }
