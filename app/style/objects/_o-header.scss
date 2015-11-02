@@ -2,6 +2,8 @@
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
+
+	padding-left: 15px;
 }
 
 .o-header__name {
@@ -9,6 +11,8 @@
 	flex-basis: 40%;
 	align-items: center;
 	flex-grow: 1;
+
+	padding-right: 15px;
 }
 
 .o-header__details {
@@ -17,6 +21,8 @@
 	flex-wrap: wrap;
 	flex-basis: 60%;
 	min-width: 400px;
+
+	padding-right: 15px;
 }
 
 .o-header__detail {
