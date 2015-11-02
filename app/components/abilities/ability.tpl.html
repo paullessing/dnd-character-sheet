@@ -1,11 +1,11 @@
 <div class="o-page__row">
-    <div class="o-ability">
-        <h3 class="o-ability__name">{{ vm.ability.name }}</h3>
-        <input type="text" pattern="[0-9+-]*" ng-model="vm.ability.points"
-            class="o-ability__value"
-        />
-        <p class="o-ability__modifier">{{ vm.ability.modifier | modifier }}</p>
-    </div>
+    <labelled-box label="{{ vm.ability.name }}" class="o-ability">
+        <p class="o-ability__modifier">
+            <input type="text" pattern="[0-9+-]*" ng-model="vm.ability.points"
+                   class="o-ability__value" />
+            {{ vm.ability.modifier | modifier }}
+        </p>
+    </labelled-box>
     <ul class="o-skills">
         <li ng-repeat="skill in vm.ability.skills" class="o-skills__item">
             <input fake-checkbox type="checkbox" ng-model="skill.isProficient" class="o-skills__proficiency" />

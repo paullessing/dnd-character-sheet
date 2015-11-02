@@ -1,0 +1,29 @@
+.c-labelled-box {
+	min-width: 100px;
+	border: 2px solid $border-color;
+	border-radius: 6px;
+
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+
+	background-color: white;
+}
+
+.c-labelled-box__content {
+	order: 1;
+	width: 100%;
+	flex-grow: 1;
+	position: relative;
+}
+
+.c-labelled-box__label {
+	order: 2;
+	width: 100%;
+	font-size: 10px;
+	text-transform: uppercase;
+	text-align: center;
+	padding: 4px;
+}

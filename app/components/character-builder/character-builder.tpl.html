@@ -58,7 +58,19 @@
             </div>
         </div>
 
-        <div class="o-page__column"></div>
+        <div class="o-page__column">
+            <div class="o-page__row">
+                <labelled-box label="Armor Class">
+                    <input type="text" pattern="[0-9]+" class="o-character-value" ng-model="vm.character.armorClass"/>
+                </labelled-box>
+                <labelled-box label="Initiative">
+                    <span class="o-character-value">{{ vm.character.initiative | modifier }}</span>
+                </labelled-box>
+                <labelled-box label="Speed">
+                    <input type="text" pattern="[0-9]+" class="o-character-value" ng-model="vm.character.speed"/>
+                </labelled-box>
+            </div>
+        </div>
         <div class="o-page__column"></div>
     </div>
 

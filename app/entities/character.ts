@@ -22,6 +22,9 @@ module Entities {
             new Ability('Wisdom', 'Animal Handling', 'Insight', 'Medicine', 'Perception', 'Survival'),
             new Ability('Charisma', 'Deception', 'Intimidation', 'Performance', 'Persuasion')
         ];
+        public armorClass: number;
+        public speed: number;
+
         public get proficiencyBonus(): number {
             return Math.floor((this.level - 1) / 4) + 2;
         }
@@ -45,6 +48,10 @@ module Entities {
 
         public get passiveWisdom(): number {
             return 10 + (this.getAbility('Wisdom').modifier || 0);
+        }
+
+        public get initiative(): number {
+            return this.getAbility('Dexterity').modifier;
         }
     }
 
