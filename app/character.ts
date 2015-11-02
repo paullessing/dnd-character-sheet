@@ -46,33 +46,55 @@ module Entities {
     export class Ability {
         constructor(private character: Character, public name: string) {}
 
-        public points: string;
+        private _pointsString: string;
+        private _points: number;
+        private _modifier: number
 
-        public get pointsTotal(): number {
+        public set points(points: string) {
+            if (points === this._pointsString) {
+                return; // Nothing to do here
+            }
+            this._pointsString = points;
+            this._points = Ability.parsePoints(this._pointsString);
+            this._modifier = this.getModifier();
+        }
+
+        public get points(): string {
+            return this._pointsString;
+        }
+
+        private static parsePoints(pointsString: string): number {
             var regex = /^([0-9]+)(?:(\+|-)([0-9]+))?$/g;
-            var match = regex.exec(this.points);
+            var match = regex.exec(pointsString);
             if (!match) {
                 return null;
             } else if (!match[2]) {
                 // No + or -
-                return this.ensureRange(parseInt(this.points));
+                return this.ensureRange(parseInt(match[1]));
             } else {
                 var modifier = (match[2] === '+') ? 1 : -1;
                 return this.ensureRange(parseInt(match[1]) + modifier * parseInt(match[3]));
             }
         }
 
-        private ensureRange(points: number): number {
+        public get pointsTotal(): number {
+            return this._points;
+        }
+
+        private static ensureRange(points: number): number {
             return Math.min(20, Math.max(0, points)); // Assuming player, monsters can go to 30
         }
 
-        public get modifier(): string {
+        private getModifier() {
             var points = this.pointsTotal;
             if (points === null) {
                 return null;
             }
-            var modifier = -5 + Math.floor(points / 2);
-            return (modifier >= 0 ? '+' : '') + modifier;
+            return -5 + Math.floor(points / 2);
+        }
+
+        public get modifier(): number {
+            return this._modifier;
         }
     }
 }
