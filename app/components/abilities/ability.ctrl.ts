@@ -17,7 +17,11 @@ module CharacterBuilder.SkillGroup {
         public proficiencyBonus: number;
 
         public getModifier(skill: Skill): number {
-            return this.ability.modifier + (skill.isProficient ? this.proficiencyBonus : 0);
+            if (typeof this.ability.modifier === 'undefined' || this.ability.modifier === null) {
+                return null;
+            } else {
+                return this.ability.modifier + (skill.isProficient ? this.proficiencyBonus : 0);
+            }
         }
     }
 }

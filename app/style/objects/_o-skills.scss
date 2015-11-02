@@ -1,0 +1,25 @@
+.o-skills {
+	flex-grow: 1;
+	margin-left: 20px;
+}
+
+.o-skills__item {
+	margin-bottom: 6px;
+}
+
+.o-skills__modifier {
+	display: inline-block;
+	border-bottom: 1px solid #363636;
+	padding: 0 4px;
+	min-width: 25px;
+	height: 15px;
+	line-height: 15px;
+	font-size: 13px;
+	text-align: center;
+	vertical-align: bottom;
+}
+
+.o-skills__name {
+	text-transform: uppercase;
+	font-size: 11px;
+}

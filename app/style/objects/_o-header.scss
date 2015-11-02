@@ -1,0 +1,32 @@
+.o-header {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.o-header__name {
+	display: flex;
+	flex-basis: 40%;
+	align-items: center;
+	flex-grow: 1;
+}
+
+.o-header__details {
+	display: flex;
+	flex-grow: 1;
+	flex-wrap: wrap;
+	flex-basis: 60%;
+	min-width: 400px;
+}
+
+.o-header__detail {
+	display: flex;
+	flex-wrap: nowrap;
+	width: 33.33%;
+	min-width: 200px;
+	flex-grow: 1;
+}
+
+.o-header__detail > * {
+	flex-grow: 1;
+}

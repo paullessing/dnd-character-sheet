@@ -1,0 +1,29 @@
+.o-page {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.o-page__column {
+	flex-basis: 330px;
+	flex-grow: 1;
+	flex-shrink: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 10px;
+
+	margin: 10px;
+	background-color: #f0f0f0;
+	border-radius: 10px;
+}
+
+// Inside columns
+.o-page__row {
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	padding: 10px;
+}
