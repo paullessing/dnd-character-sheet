@@ -4,6 +4,22 @@
 
 .c-combat__fixedItem {
 	flex-grow: 0;
+	width: 100px;
+}
+
+.c-combat__fixedItem--shield {
+	border: {
+		bottom: {
+			right-radius: 50% 80%;
+			left-radius: 50% 80%;
+		};
+		top: {
+			right-radius: 12% 20%;
+			left-radius: 12% 20%;
+		}
+	}
+	width: 80px;
+	margin-right: 20px;
 }
 
 .c-combat__fixedValue {

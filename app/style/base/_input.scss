@@ -1,5 +1,7 @@
 input,
-textarea {
+textarea,
+select,
+option {
 	outline: none;
 	font-family: $font-default;
 }

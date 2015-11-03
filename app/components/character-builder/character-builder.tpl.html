@@ -4,7 +4,7 @@
 <form name="characterBuilder">
     <header class="c-header">
         <div class="c-header__name">
-            <label class="o-inline-field">
+            <label class="o-inline-field o-inline-field--large">
                 <span class="o-inline-field__label">Character Name</span>
                 <input class="o-inline-field__field" ng-model="vm.character.name" type="text" required />
             </label>
@@ -34,7 +34,7 @@
                               options="vm.alignments"></character-detail>
             <character-detail class="c-header__detail"
                               label="Experience Points"
-                              value="vm.character.details.xp"
+                              value="vm.character.xp"
                               type="number"></character-detail>
         </div>
     </header>
@@ -63,7 +63,7 @@
 
         <div class="c-page__column c-combat">
             <div class="c-page__row">
-                <labelled-box label="Armor Class" class="c-combat__fixedItem">
+                <labelled-box label="Armor Class" class="c-combat__fixedItem c-combat__fixedItem--shield">
                     <input type="text" pattern="[0-9]+" class="c-combat__fixedValue" ng-model="vm.character.armorClass" required/>
                 </labelled-box>
                 <labelled-box label="Initiative" class="c-combat__fixedItem">

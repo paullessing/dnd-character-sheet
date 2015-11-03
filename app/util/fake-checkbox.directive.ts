@@ -10,7 +10,6 @@ module Utilities {
                 }
                 var classes = attributes['class'];
                 var wrapper = angular.element('<label class="o-fake-checkbox"></label>');
-                console.log("Classes:", classes);
                 wrapper.addClass(classes);
                 attributes['class'] = '';
                 element.wrap(wrapper).after('<span class="o-fake-checkbox__element"></span>');

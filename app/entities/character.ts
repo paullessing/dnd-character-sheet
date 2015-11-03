@@ -3,18 +3,8 @@
 module Entities {
     export class Character {
         public name: string;
-        public details: {
-            class?: string;
-            level?: number;
-            background?: string;
-            playerName?: string;
-            race?: string;
-            alignment?: string;
-            xp: number;
-        } = {
-            xp: 0
-        };
-        public abilities = [
+        public details: CharacterDetails = {};
+        public abilities: Ability[] = [
             new Ability('Strength', 'Athletics'),
             new Ability('Dexterity', 'Acrobatics', 'Sleight of Hand', 'Stealth'),
             new Ability('Constitution'),
@@ -24,17 +14,18 @@ module Entities {
         ];
         public armorClass: number;
         public speed: number;
+        public xp: number = 0;
 
         public get proficiencyBonus(): number {
             return Math.floor((this.level - 1) / 4) + 2;
         }
 
         public get level(): number {
-            return getLevel(this.details.xp);
+            return getLevel(this.xp);
         }
 
         public get xpUntilNextLevel(): number {
-            return getXpRequiredForLevelUp(this.details.xp);
+            return getXpRequiredForLevelUp(this.xp);
         }
 
         private getAbility(name): Ability {
@@ -79,5 +70,13 @@ module Entities {
     export interface DeathSaves {
         success: number;
         failure: number;
+    }
+
+    export interface CharacterDetails {
+        class?: string;
+        background?: string;
+        playerName?: string;
+        race?: string;
+        alignment?: string;
     }
 }

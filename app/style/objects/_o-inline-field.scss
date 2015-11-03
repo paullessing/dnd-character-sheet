@@ -15,6 +15,20 @@
 	width: auto;
 }
 
+.o-inline-field--large {
+	min-height: 60px;
+
+	.o-inline-field__field {
+		height: 40px;
+		font-size: toRem(30px);
+	}
+
+	.o-inline-field__label {
+		font-size: toRem(12px);
+		top: 40px;
+	}
+}
+
 .o-inline-field__field {
 	display: block;
 	height: 30px;
