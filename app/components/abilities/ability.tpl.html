@@ -2,6 +2,7 @@
     <labelled-box label="{{ vm.ability.name }}" class="c-ability">
         <p class="c-ability__modifier">
             <input type="text" pattern="[0-9+-]*" ng-model="vm.ability.points"
+                   required
                    class="c-ability__value" />
             {{ vm.ability.modifier | modifier }}
         </p>

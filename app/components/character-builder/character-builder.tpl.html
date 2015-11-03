@@ -1,9 +1,9 @@
-<form>
+<form name="characterBuilder">
     <header class="c-header">
         <div class="c-header__name">
             <label class="o-inline-field">
                 <span class="o-inline-field__label">Character Name</span>
-                <input class="o-inline-field__field" ng-model="vm.character.name" type="text"/>
+                <input class="o-inline-field__field" ng-model="vm.character.name" type="text" required />
             </label>
         </div>
 
@@ -61,13 +61,13 @@
         <div class="c-page__column c-combat">
             <div class="c-page__row">
                 <labelled-box label="Armor Class" class="c-combat__fixedItem">
-                    <input type="text" pattern="[0-9]+" class="c-combat__fixedValue" ng-model="vm.character.armorClass"/>
+                    <input type="text" pattern="[0-9]+" class="c-combat__fixedValue" ng-model="vm.character.armorClass" required/>
                 </labelled-box>
                 <labelled-box label="Initiative" class="c-combat__fixedItem">
                     <span class="c-combat__fixedValue">{{ vm.character.initiative | modifier }}</span>
                 </labelled-box>
                 <labelled-box label="Speed" class="c-combat__fixedItem">
-                    <input type="text" pattern="[0-9]+" class="c-combat__fixedValue" ng-model="vm.character.speed"/>
+                    <input type="text" pattern="[0-9]+" class="c-combat__fixedValue" ng-model="vm.character.speed" required/>
                 </labelled-box>
             </div>
             <div class="c-page__row">
@@ -76,7 +76,7 @@
                         <span class="c-combat-counter__limitLabel">
                             Hit Point Maximum
                         </span>
-                        <input type="number" class="c-combat-counter__limitInput" ng-model="vm.character.maxHitpoints" />
+                        <input type="number" class="c-combat-counter__limitInput" ng-model="vm.character.maxHitpoints" required />
                     </label>
                     <div class="c-combat-counter__valueWrapper">
                         <textarea class="c-combat-counter__value c-combat-counter__value--large" ng-model="vm.character.hitpoints"></textarea>
@@ -96,7 +96,7 @@
                         <span class="c-combat-counter__limitLabel c-combat-counter__limitLabel--small">
                             Total
                         </span>
-                        <input type="text" pattern="[0-9]+d[0-9]+" class="c-combat-counter__limitInput" ng-model="vm.character.hitDice" />
+                        <input type="text" pattern="[0-9]+d[0-9]+" class="c-combat-counter__limitInput" ng-model="vm.character.hitDice" required />
                     </label>
                     <div class="c-combat-counter__valueWrapper">
                         <input type="number" class="c-combat-counter__value" ng-model="vm.character.hitDiceUsed" />

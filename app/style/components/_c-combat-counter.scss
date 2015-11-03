@@ -15,7 +15,7 @@
 }
 
 .c-combat-counter__limitInput {
-	width: toRem(50px); // Will grow
+	width: 50px; // Will grow
 	flex-shrink: 1;
 	flex-grow: 1;
 	margin-left: 6px;
@@ -31,13 +31,14 @@
 
 .c-combat-counter__value {
 	width: 100%;
-	min-height: toRem(40px);
+	min-height: 40px;
 	padding: 4px 0;
 	border: 0;
 	resize: none;
 	background: none;
+	font-size: toRem(16px);
 }
 
 .c-combat-counter__value--large {
-	min-height: toRem(56px);
+	min-height: 56px;
 }
