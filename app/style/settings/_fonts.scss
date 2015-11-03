@@ -1,1 +1,7 @@
 $font-default: sans-serif;
+
+$font-size-base: 10px;
+
+@function toRem($size) {
+	@return ($size / $font-size-base) * 1rem;
+}

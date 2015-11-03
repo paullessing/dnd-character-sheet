@@ -16,4 +16,10 @@
 	:checked + & {
 		background-color: #828282;
 	}
+
+	@media print {
+		border-width: 1px;
+		width: 8px;
+		height: 8px;
+	}
 }

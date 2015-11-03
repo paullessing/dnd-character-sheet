@@ -1,4 +1,13 @@
 html {
 	color: $primary-font-color;
 	font-family: $font-default;
+
+	font-size: $font-size-base;
+
+	@media print {
+		font-size: 4px;
+	}
+	&.print {
+		font-size: 4px;
+	}
 }

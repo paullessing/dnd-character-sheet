@@ -22,7 +22,7 @@
 .o-labelled-box__label {
 	order: 2;
 	width: 100%;
-	font-size: 10px;
+	font-size: toRem(10px);
 	font-weight: 600;
 	text-transform: uppercase;
 	text-align: center;
