@@ -1,4 +1,4 @@
-.o-header {
+.c-header {
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
@@ -6,7 +6,7 @@
 	padding-left: 15px;
 }
 
-.o-header__name {
+.c-header__name {
 	display: flex;
 	flex-basis: 40%;
 	align-items: center;
@@ -15,7 +15,7 @@
 	padding-right: 15px;
 }
 
-.o-header__details {
+.c-header__details {
 	display: flex;
 	flex-grow: 1;
 	flex-wrap: wrap;
@@ -25,7 +25,7 @@
 	padding-right: 15px;
 }
 
-.o-header__detail {
+.c-header__detail {
 	display: flex;
 	flex-wrap: nowrap;
 	width: 33.33%;
@@ -33,6 +33,6 @@
 	flex-grow: 1;
 }
 
-.o-header__detail > * {
+.c-header__detail > * {
 	flex-grow: 1;
 }

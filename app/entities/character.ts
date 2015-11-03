@@ -53,6 +53,10 @@ module Entities {
         public get initiative(): number {
             return this.getAbility('Dexterity').modifier;
         }
+        public deathSaves: DeathSaves = {
+            success: 0,
+            failure: 0
+        }
     }
 
     var xpToLevel = [
@@ -70,5 +74,10 @@ module Entities {
 
     export function getXpRequiredForLevelUp(xp) {
         return xpToLevel[getLevel(xp)] - xp;
+    }
+
+    export interface DeathSaves {
+        success: number;
+        failure: number;
     }
 }

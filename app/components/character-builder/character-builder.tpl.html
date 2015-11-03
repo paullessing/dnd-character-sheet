@@ -1,77 +1,113 @@
 <form>
-    <header class="o-header">
-        <div class="o-header__name">
-            <label class="c-inline-field">
-                <span class="c-inline-field__label">Character Name</span>
-                <input class="c-inline-field__field" ng-model="vm.character.name" type="text"/>
+    <header class="c-header">
+        <div class="c-header__name">
+            <label class="o-inline-field">
+                <span class="o-inline-field__label">Character Name</span>
+                <input class="o-inline-field__field" ng-model="vm.character.name" type="text"/>
             </label>
         </div>
 
-        <div class="o-header__details">
-            <div class="o-header__detail">
+        <div class="c-header__details">
+            <div class="c-header__detail">
                 <character-detail label="Class"
                                   value="vm.character.details.class"></character-detail>
-                <div class="c-inline-field c-inline-field--small">
-                    <span class="c-inline-field__label">Level</span>
-                    <span class="c-inline-field__field " title="XP until next level: {{ vm.character.xpUntilNextLevel }}">{{ vm.character.level }}</span>
+                <div class="o-inline-field o-inline-field--small">
+                    <span class="o-inline-field__label">Level</span>
+                    <span class="o-inline-field__field " title="XP until next level: {{ vm.character.xpUntilNextLevel }}">{{ vm.character.level }}</span>
                 </div>
             </div>
-            <character-detail class="o-header__detail"
+            <character-detail class="c-header__detail"
                               label="Background"
                               value="vm.character.details.background"></character-detail>
-            <character-detail class="o-header__detail"
+            <character-detail class="c-header__detail"
                               label="Player Name"
                               value="vm.character.details.playerName"></character-detail>
-            <character-detail class="o-header__detail"
+            <character-detail class="c-header__detail"
                               label="Race"
                               value="vm.character.details.race"></character-detail>
-            <character-detail class="o-header__detail"
+            <character-detail class="c-header__detail"
                               label="Alignment"
                               value="vm.character.details.alignment"
                               options="vm.alignments"></character-detail>
-            <character-detail class="o-header__detail"
+            <character-detail class="c-header__detail"
                               label="Experience Points"
                               value="vm.character.details.xp"
                               type="number"></character-detail>
         </div>
     </header>
 
-    <div class="o-page">
-        <div class="o-page__column">
-            <div class="o-ability-property">
-                <span class="o-ability-property__label" title="Based on the current level">Proficiency Bonus</span>
-                <span class="o-ability-property__modifier">{{ vm.character.proficiencyBonus | modifier }}</span>
+    <div class="c-page">
+        <div class="c-page__column">
+            <div class="c-ability-property">
+                <span class="c-ability-property__label" title="Based on the current level">Proficiency Bonus</span>
+                <span class="c-ability-property__modifier">{{ vm.character.proficiencyBonus | modifier }}</span>
             </div>
-            <label class="o-ability-property">
-                <span class="o-ability-property__label" title="Defined by the GM">Inspiration</span>
-                <input class="o-ability-property__modifier" type="text" pattern="[+-]?[0-9]+"/>
+            <label class="c-ability-property">
+                <span class="c-ability-property__label" title="Defined by the GM">Inspiration</span>
+                <input class="c-ability-property__modifier" type="text" pattern="[+-]?[0-9]+"/>
             </label>
 
             <ability ng-repeat="ability in vm.character.abilities"
                      ability="ability"
                      proficiency-bonus="vm.character.proficiencyBonus"></ability>
 
-            <div class="o-ability-property">
-                <span class="o-ability-property__label"
+            <div class="c-ability-property">
+                <span class="c-ability-property__label"
                       title="10 + Perception modifier">Passive Wisdom (Perception)</span>
-                <span class="o-ability-property__modifier">{{ vm.character.passiveWisdom }}</span>
+                <span class="c-ability-property__modifier">{{ vm.character.passiveWisdom }}</span>
             </div>
         </div>
 
-        <div class="o-page__column">
-            <div class="o-page__row">
-                <labelled-box label="Armor Class">
-                    <input type="text" pattern="[0-9]+" class="o-character-value" ng-model="vm.character.armorClass"/>
+        <div class="c-page__column c-combat">
+            <div class="c-page__row">
+                <labelled-box label="Armor Class" class="c-combat__fixedItem">
+                    <input type="text" pattern="[0-9]+" class="c-combat__fixedValue" ng-model="vm.character.armorClass"/>
                 </labelled-box>
-                <labelled-box label="Initiative">
-                    <span class="o-character-value">{{ vm.character.initiative | modifier }}</span>
+                <labelled-box label="Initiative" class="c-combat__fixedItem">
+                    <span class="c-combat__fixedValue">{{ vm.character.initiative | modifier }}</span>
                 </labelled-box>
-                <labelled-box label="Speed">
-                    <input type="text" pattern="[0-9]+" class="o-character-value" ng-model="vm.character.speed"/>
+                <labelled-box label="Speed" class="c-combat__fixedItem">
+                    <input type="text" pattern="[0-9]+" class="c-combat__fixedValue" ng-model="vm.character.speed"/>
+                </labelled-box>
+            </div>
+            <div class="c-page__row">
+                <labelled-box label="Current Hit Points" class="c-hitpoints c-combat__fullItem">
+                    <label class="c-combat-counter__limit">
+                        <span class="c-combat-counter__limitLabel">
+                            Hit Point Maximum
+                        </span>
+                        <input type="number" class="c-combat-counter__limitInput" ng-model="vm.character.maxHitpoints" />
+                    </label>
+                    <div class="c-combat-counter__valueWrapper">
+                        <textarea class="c-combat-counter__value c-combat-counter__value--large" ng-model="vm.character.hitpoints"></textarea>
+                    </div>
+                </labelled-box>
+            </div>
+            <div class="c-page__row">
+                <labelled-box label="Temporary Hit Points" class="c-temporary-hitpoints c-combat__fullItem">
+                    <div class="c-combat-counter__valueWrapper">
+                        <textarea class="c-combat-counter__value" ng-model="vm.character.temporaryHitpoints"></textarea>
+                    </div>
+                </labelled-box>
+            </div>
+            <div class="c-page__row">
+                <labelled-box label="Hit Dice" class="c-hit-dice c-combat__sharedItem">
+                    <label class="c-combat-counter__limit">
+                        <span class="c-combat-counter__limitLabel c-combat-counter__limitLabel--small">
+                            Total
+                        </span>
+                        <input type="text" pattern="[0-9]+d[0-9]+" class="c-combat-counter__limitInput" ng-model="vm.character.hitDice" />
+                    </label>
+                    <div class="c-combat-counter__valueWrapper">
+                        <input type="number" class="c-combat-counter__value" ng-model="vm.character.hitDiceUsed" />
+                    </div>
+                </labelled-box>
+                <labelled-box label="Death Saves" class="c-combat__sharedItem">
+                    <death-saves value="vm.character.deathSaves"></death-saves>
                 </labelled-box>
             </div>
         </div>
-        <div class="o-page__column"></div>
+        <div class="c-page__column"></div>
     </div>
 
 </form>

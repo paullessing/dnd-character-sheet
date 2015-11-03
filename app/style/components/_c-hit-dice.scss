@@ -1,0 +1,32 @@
+.c-hit-dice {
+	flex-grow: 1;
+	flex-basis: 100px;
+}
+
+.c-hit-dice__total {
+	display: flex;
+	width: 100%;
+	padding: 4px 6px 8px;
+	align-items: center;
+}
+
+.c-hit-dice__totalLabel {
+	font-size: 11px;
+}
+
+.c-hit-dice__totalInput {
+	width: 100px;
+	flex-grow: 1;
+	flex-shrink: 1;
+	margin-left: 6px;
+	border: none;
+	border-bottom: 1px dotted lighten($border-color, 40);
+	font-size: 14px;
+}
+
+.c-hit-dice__value {
+	width: 100%;
+	min-height: 28px;
+	padding: 4px 6px;
+	border: 0;
+}

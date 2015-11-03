@@ -1,0 +1,31 @@
+.c-death-saves {
+	width: 100%;
+	padding: 10px 0;
+	display: table;
+}
+
+.c-death-saves__row {
+	font-size: 11px;
+	text-transform: uppercase;
+	display: table-row;
+}
+
+.c-death-saves__label {
+	display: table-cell;
+	text-align: right;
+	padding: 4px 8px 4px 2px
+}
+.c-death-saves__values {
+	display: table-cell;
+	text-align: left;
+	padding-right: 4px;
+}
+
+.c-death-saves__value {
+	position: relative;
+	margin-right: 5px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}

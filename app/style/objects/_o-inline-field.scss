@@ -1,5 +1,5 @@
 
-.c-inline-field {
+.o-inline-field {
 	display: inline-block;
 	vertical-align: top;
 	min-height: 50px;
@@ -9,13 +9,13 @@
 	position: relative;
 }
 
-.c-inline-field--small {
+.o-inline-field--small {
 	min-width: 50px;
 	flex-grow: 0;
 	width: auto;
 }
 
-.c-inline-field__field {
+.o-inline-field__field {
 	display: block;
 	height: 30px;
 	font-size: 20px;
@@ -24,12 +24,11 @@
 	padding: 2px 4px;
 	width: 100%;
 	border: none;
-	outline: none;
 	border-bottom: 1px dotted lighten($border-color, 50);
 	background: none;
 }
 
-.c-inline-field__label {
+.o-inline-field__label {
 	display: inline-block;
 	font-size: 11px;
 	text-transform: uppercase;

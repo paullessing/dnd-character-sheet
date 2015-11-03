@@ -1,0 +1,12 @@
+<div class="c-death-saves">
+    <div class="c-death-saves__row" ng-repeat="property in vm.properties">
+        <label class="c-death-saves__label">{{ property.label }}</label>
+        <div class="c-death-saves__values">
+            <input type="checkbox" ng-repeat="i in property.repeater"
+                   fake-checkbox
+                   ng-model="property.values[$index]"
+                   ng-change="property.onChange($index)"
+                   class="c-death-saves__value" />
+        </div>
+    </div>
+</div>

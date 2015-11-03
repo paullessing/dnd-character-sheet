@@ -1,9 +1,9 @@
-.c-fake-checkbox {
+.o-fake-checkbox {
 	> input[type=checkbox] {
 		display: none;
 	}
 }
-.c-fake-checkbox__element {
+.o-fake-checkbox__element {
 	display: inline-block;
 	width: 12px;
 	height: 12px;

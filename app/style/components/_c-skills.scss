@@ -1,12 +1,12 @@
-.o-skills {
+.c-skills {
 	flex-grow: 1;
-	margin-left: 20px;
+	margin-left: 10px;
 }
 
-.o-skills__item {
+.c-skills__item {
 }
 
-.o-skills__modifier {
+.c-skills__modifier {
 	display: inline-block;
 	border-bottom: 1px solid $border-color;
 	padding: 0 4px;
@@ -18,7 +18,7 @@
 	vertical-align: bottom;
 }
 
-.o-skills__name {
+.c-skills__name {
 	text-transform: uppercase;
 	font-size: 11px;
 }

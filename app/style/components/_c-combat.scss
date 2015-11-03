@@ -1,0 +1,25 @@
+.c-combat__fullItem {
+	width: 100%;
+}
+
+.c-combat__fixedItem {
+	flex-grow: 0;
+}
+
+.c-combat__fixedValue {
+	height: 50px;
+	width: 100px;
+	background: none;
+	border: none;
+	font-size: 30px;
+	text-align: center;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.c-combat__sharedItem {
+	flex-grow: 1;
+	flex-basis: 100px;
+}

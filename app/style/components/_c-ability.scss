@@ -1,8 +1,9 @@
-.o-ability {
+.c-ability {
 	margin-top: 10px;
+	min-width: 100px;
 }
 
-.o-ability__modifier {
+.c-ability__modifier {
 	font-size: 30px;
 	display: flex;
 	align-items: center;
@@ -12,14 +13,13 @@
 	min-height: 65px;
 }
 
-.o-ability__value {
+.c-ability__value {
 	position: absolute;
 	top: -10px;
 	left: 50%;
 	@include transform(translateX(-50%));
 	width: 60px;
 	border: 1px solid $border-color;
-	outline: none;
 	background: white;
 	text-align: center;
 	padding: 6px 4px;

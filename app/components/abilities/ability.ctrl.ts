@@ -1,7 +1,7 @@
 /// <reference path="../../entities/character.ts" />
 /// <reference path="../../entities/ability.ts" />
 
-module CharacterBuilder.SkillGroup {
+module CharacterBuilder.Abilities {
     import IScope = angular.IScope;
     import Ability = Entities.Ability;
     import Character = Entities.Character;

@@ -1,16 +1,16 @@
-<div class="o-page__row">
-    <labelled-box label="{{ vm.ability.name }}" class="o-ability">
-        <p class="o-ability__modifier">
+<div class="c-page__row">
+    <labelled-box label="{{ vm.ability.name }}" class="c-ability">
+        <p class="c-ability__modifier">
             <input type="text" pattern="[0-9+-]*" ng-model="vm.ability.points"
-                   class="o-ability__value" />
+                   class="c-ability__value" />
             {{ vm.ability.modifier | modifier }}
         </p>
     </labelled-box>
-    <ul class="o-skills">
-        <li ng-repeat="skill in vm.ability.skills" class="o-skills__item">
-            <input fake-checkbox type="checkbox" ng-model="skill.isProficient" class="o-skills__proficiency" />
-            <span class="o-skills__modifier">{{ vm.getModifier(skill) | modifier }}</span>
-            <span class="o-skills__name">{{ skill.name }}</span>
+    <ul class="c-skills">
+        <li ng-repeat="skill in vm.ability.skills" class="c-skills__item">
+            <input fake-checkbox type="checkbox" ng-model="skill.isProficient" class="c-skills__proficiency" />
+            <span class="c-skills__modifier">{{ vm.getModifier(skill) | modifier }}</span>
+            <span class="c-skills__name">{{ skill.name }}</span>
         </li>
     </ul>
 </div>

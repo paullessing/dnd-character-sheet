@@ -1,7 +1,7 @@
 /// <reference path="./ability.ctrl.ts" />
 
-module CharacterBuilder.SkillGroup {
-    export function SkillGroupDirective() {
+module CharacterBuilder.Abilities {
+    export function AbilityDirective() {
         return {
             scope: {
                 ability: '=',
@@ -18,6 +18,6 @@ module CharacterBuilder.SkillGroup {
     }
 
     angular.module('characterBuilderApp')
-        .directive('ability', SkillGroupDirective);
+        .directive('ability', AbilityDirective);
 }
 

@@ -1,5 +1,5 @@
-.c-labelled-box {
-	min-width: 100px;
+.o-labelled-box {
+	min-width: 80px;
 	border: 2px solid $border-color;
 	border-radius: 6px;
 
@@ -12,17 +12,18 @@
 	background-color: white;
 }
 
-.c-labelled-box__content {
+.o-labelled-box__content {
 	order: 1;
 	width: 100%;
 	flex-grow: 1;
 	position: relative;
 }
 
-.c-labelled-box__label {
+.o-labelled-box__label {
 	order: 2;
 	width: 100%;
 	font-size: 10px;
+	font-weight: 600;
 	text-transform: uppercase;
 	text-align: center;
 	padding: 4px;

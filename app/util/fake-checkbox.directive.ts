@@ -8,8 +8,12 @@ module Utilities {
                 if (element.prop('tagName').toLowerCase() !== 'input' || attributes['type'] !== 'checkbox') {
                     throw new Error("Must use fake-checkbox on input[type=checkbox] only!")
                 }
-                var wrapper = angular.element('<label class="c-fake-checkbox"></label>');
-                element.wrap(wrapper).after('<span class="c-fake-checkbox__element"></span>');
+                var classes = attributes['class'];
+                var wrapper = angular.element('<label class="o-fake-checkbox"></label>');
+                console.log("Classes:", classes);
+                wrapper.addClass(classes);
+                attributes['class'] = '';
+                element.wrap(wrapper).after('<span class="o-fake-checkbox__element"></span>');
             }
         }
     }
