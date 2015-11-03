@@ -9,7 +9,7 @@
     </labelled-box>
     <ul class="c-skills">
         <li ng-repeat="skill in vm.ability.skills" class="c-skills__item">
-            <input fake-checkbox type="checkbox" ng-model="skill.isProficient" class="c-skills__proficiency" />
+            <input fake-checkbox type="checkbox" ng-model="skill.isProficient" class="c-skills__proficiency" ng-class="{ 'o-fake-checkbox--special': $index === 0 }" />
             <span class="c-skills__modifier">{{ vm.getModifier(skill) | modifier }}</span>
             <span class="c-skills__name">{{ skill.name }}</span>
         </li>
