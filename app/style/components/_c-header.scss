@@ -13,6 +13,10 @@
 	flex-grow: 1;
 
 	padding-right: 15px;
+
+	@media screen and (max-width: 768px) {
+		flex-basis: 100%;
+	}
 }
 
 .c-header__details {

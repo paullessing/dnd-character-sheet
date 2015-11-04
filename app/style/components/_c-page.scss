@@ -12,11 +12,8 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
-	padding: 10px;
 
 	margin: 10px;
-	background-color: #f0f0f0;
-	border-radius: 10px;
 
 	@media print {
 		flex-basis: 200px;
@@ -25,17 +22,24 @@
 	}
 }
 
+.c-page__box {
+	background-color: #f0f0f0;
+	border-radius: 10px;
+	padding: 10px 10px 0;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
 // Inside columns
 .c-page__row {
 	width: 100%;
 	display: flex;
 	flex-wrap: nowrap;
 	flex-direction: row;
-	padding: 10px;
-	justify-content: space-between;
-	margin-right: -10px;
+	justify-content: center;
+	margin-bottom: 10px;
 
-	> * {
+	> *:not(:last-child) {
 		margin-right: 10px; // Space between elements
 	}
 

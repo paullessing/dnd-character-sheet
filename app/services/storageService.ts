@@ -6,7 +6,7 @@ module Services {
     import Character = Entities.Character;
     import Ability = Entities.Ability;
     import Skill = Entities.Skill;
-    import Character = Entities.Character;
+    import Inventory = Entities.Inventory;
 
     export class StorageService {
         static $inject = ['$localStorage'];
@@ -30,32 +30,38 @@ module Services {
                 temporaryHitpoints: character.temporaryHitpoints,
                 hitDice: character.hitDice,
                 hitDiceUsed: character.hitDiceUsed,
-                abilities: character.abilities.map(abilityToStored)
+                abilities: character.abilities.map(abilityToStored),
+                inventory: character.inventory
             }
 
             this.$localStorage.character = data;
         }
 
         public load(): Character {
-            var data = this.$localStorage.character;
-            var character = new Character();
-            if (!data) {
-                return character;
-            }
-            character.details = data.details;
-            character.name = data.name;
-            character.xp = data.xp;
-            character.deathSaves = data.deathSaves;
-            character.armorClass = data.armorClass;
-            character.speed = data.speed;
-            character.maxHitpoints = data.maxHitpoints;
-            character.hitpoints = data.hitpoints;
-            character.temporaryHitpoints = data.temporaryHitpoints;
-            character.hitDice = data.hitDice;
-            character.hitDiceUsed = data.hitDiceUsed;
-            character.abilities = data.abilities.map(storedToAbility);
+            try {
+                var data = $.extend(true, {}, this.$localStorage.character); // Ensure we don't accidentally write back to local storage
+                var character = new Character();
+                if (!data) {
+                    return character;
+                }
+                character.details = data.details;
+                character.name = data.name;
+                character.xp = data.xp;
+                character.deathSaves = data.deathSaves;
+                character.armorClass = data.armorClass;
+                character.speed = data.speed;
+                character.maxHitpoints = data.maxHitpoints;
+                character.hitpoints = data.hitpoints;
+                character.temporaryHitpoints = data.temporaryHitpoints;
+                character.hitDice = data.hitDice;
+                character.hitDiceUsed = data.hitDiceUsed;
+                character.abilities = data.abilities.map(storedToAbility);
+                character.inventory = data.inventory || new Inventory();
 
-            return character;
+                return character;
+            } catch (e) {
+                return new Character();
+            }
         }
     }
 

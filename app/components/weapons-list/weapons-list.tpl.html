@@ -1,0 +1,17 @@
+<div class="c-weapons-list">
+    <labelled-box label="Attacks & Spellcasting">
+        <div class="c-weapons-list__content">
+            Attacks
+
+            <ul>
+                <li ng-repeat="ownedWeapon in vm.inventory.weapons">{{ ownedWeapon.weapon.name }}</li>
+                <li>
+                    <select ng-model="vm.newWeapon" ng-options="weapon as weapon.name for (key, weapon) in vm.weaponChoices">
+                        <option value="">Select Weapon</option>
+                    </select>
+                    <button ng-click="vm.addWeapon()">Add</button>
+                </li>
+            </ul>
+        </div>
+    </labelled-box>
+</div>

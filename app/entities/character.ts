@@ -1,4 +1,5 @@
 /// <reference path="./ability.ts" />
+/// <reference path="./inventory.ts" />
 
 module Entities {
     export class Character {
@@ -20,6 +21,8 @@ module Entities {
         public hitDice: string;
         public hitDiceUsed: number;
         public temporaryHitpoints: string;
+
+        public inventory: Inventory = new Inventory();
 
         public get proficiencyBonus(): number {
             return Math.floor((this.level - 1) / 4) + 2;
@@ -43,7 +46,9 @@ module Entities {
         }
 
         public get passiveWisdom(): number {
-            return 10 + (this.getAbility('Wisdom').modifier || 0);
+            var wisdom = this.getAbility('Wisdom');
+            var perception = wisdom.getSkill('Perception');
+            return 10 + wisdom.modifier + (perception.isProficient ? this.proficiencyBonus : 0); // TODO encapsulate this logic in a single component
         }
 
         public get initiative(): number {
