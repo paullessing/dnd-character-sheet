@@ -15,6 +15,11 @@ module Entities {
         public armorClass: number;
         public speed: number;
         public xp: number = 0;
+        public maxHitpoints: number;
+        public hitpoints: string;
+        public hitDice: string;
+        public hitDiceUsed: number;
+        public temporaryHitpoints: string;
 
         public get proficiencyBonus(): number {
             return Math.floor((this.level - 1) / 4) + 2;

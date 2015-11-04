@@ -1,7 +1,12 @@
 module Entities {
     export class Ability {
         constructor(public name: string, ...skills: string[]) {
-            this._skills = [new Skill("Saving Throws")].concat(skills.map(name => new Skill(name)));
+            var hasSavingThrows = skills.filter(skill => skill === 'Saving Throws').length;
+            var _skills = [];
+            if (!hasSavingThrows) {
+                _skills.push(new Skill("Saving Throws"));
+            }
+            this._skills = _skills.concat(skills.map(name => new Skill(name)));
         }
 
         private _pointsString: string;

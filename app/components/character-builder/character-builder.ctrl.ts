@@ -5,11 +5,15 @@ module CharacterBuilder {
     import Character = Entities.Character;
     import IScope = angular.IScope;
     import IFormController = angular.IFormController;
+    import StorageService = Services.StorageService;
 
     export class CharacterBuilderController {
-        constructor(private $scope: CharacterBuilderScope) {}
+        static $inject = ['$scope', 'StorageService'];
+        public character;
 
-        public character = new Character();
+        constructor(private $scope: CharacterBuilderScope, private StorageService: StorageService) {
+            this.character = this.StorageService.load();
+        }
 
         public alignments = Entities.AlignmentNames;
 
