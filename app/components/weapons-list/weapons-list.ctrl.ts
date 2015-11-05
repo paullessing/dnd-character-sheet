@@ -17,15 +17,34 @@ module CharacterBuilder.WeaponsList {
 
         public weaponChoices = Weapons.StandardWeapons;
 
-        public newWeapon: Weapon;
+        public newWeapon: NewWeapon;
 
         public get inventory(): Inventory {
             return this.character.inventory;
         }
 
-        public addWeapon() {
-            this.inventory.weapons.push(new OwnedWeapon(this.newWeapon));
-            this.newWeapon = null;
+
+        public onWeaponKeypress(event: JQueryEventObject) {
+            if (event.keyCode === 13) {
+                if (this.newWeapon.weapon && this.newWeapon.damage && this.newWeapon.attackBonus) {
+                    this.addWeapon();
+                    event.preventDefault();
+                }
+            }
         }
+
+        public addWeapon() {
+            var weapon = new OwnedWeapon(this.newWeapon.weapon);
+            weapon.attackBonus = this.newWeapon.attackBonus;
+            weapon.damage = this.newWeapon.damage;
+            this.inventory.weapons.push(weapon);
+            this.newWeapon = {};
+        }
+    }
+
+    interface NewWeapon {
+        weapon?: Weapon;
+        attackBonus?: number;
+        damage?: string;
     }
 }

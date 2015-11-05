@@ -1,17 +1,38 @@
 <div class="c-weapons-list">
     <labelled-box label="Attacks & Spellcasting">
         <div class="c-weapons-list__content">
-            Attacks
-
-            <ul>
-                <li ng-repeat="ownedWeapon in vm.inventory.weapons">{{ ownedWeapon.weapon.name }}</li>
-                <li>
-                    <select ng-model="vm.newWeapon" ng-options="weapon as weapon.name for (key, weapon) in vm.weaponChoices">
-                        <option value="">Select Weapon</option>
-                    </select>
-                    <button ng-click="vm.addWeapon()">Add</button>
-                </li>
-            </ul>
+            <div class="c-owned-weapons">
+                <div class="c-owned-weapons__item">
+                    <div class="c-owned-weapons__name-header">Name</div>
+                    <div class="c-owned-weapons__attack-header">Atk Bonus</div>
+                    <div class="c-owned-weapons__damage-header">Damage</div>
+                </div>
+                <div ng-repeat="ownedWeapon in vm.inventory.weapons" class="c-owned-weapons__item">
+                    <div class="c-owned-weapons__name">
+                        <span class="c-owned-weapons__value">{{ ownedWeapon.weapon.name }}</span>
+                    </div>
+                    <div class="c-owned-weapons__attack-bonus">
+                        <span class="c-owned-weapons__value">{{ ownedWeapon.attackBonus }}</span>
+                    </div>
+                    <div class="c-owned-weapons__damage">
+                        <span class="c-owned-weapons__value">{{ ownedWeapon.damage }}</span>
+                    </div>
+                </div>
+                <div ng-keypress="vm.onWeaponKeypress($event)" class="c-owned-weapons__item">
+                    <div class="c-owned-weapons__name">
+                        <select class="c-owned-weapons__weapon-input"
+                                ng-model="vm.newWeapon.weapon" ng-options="weapon as weapon.name for (key, weapon) in vm.weaponChoices">
+                            <option value="">Select Weapon</option>
+                        </select>
+                    </div>
+                    <div class="c-owned-weapons__attack-bonus">
+                        <input ng-model="vm.newWeapon.attackBonus" class="c-owned-weapons__attack-input" type="number" />
+                    </div>
+                    <div class="c-owned-weapons__damage">
+                        <input ng-model="vm.newWeapon.damage" class="c-owned-weapons__damage-input" type="text" />
+                    </div>
+                </div>
+            </div>
         </div>
     </labelled-box>
 </div>

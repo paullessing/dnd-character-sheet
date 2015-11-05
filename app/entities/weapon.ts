@@ -12,6 +12,9 @@ module Entities.Weapons {
 
     export class OwnedWeapon {
         constructor(public weapon: Weapon) {}
+
+        public attackBonus: number;
+        public damage: string;
     }
 
     export enum Property {

@@ -1,0 +1,101 @@
+.c-owned-weapons {
+	display: table;
+}
+
+.c-owned-weapons__item {
+	display: table-row;
+	padding-bottom: 10px;
+}
+
+%f-owned-weapons__name-column {
+	display: table-cell;
+	width: 40%
+}
+
+%f-owned-weapons__attack-column {
+	display: table-cell;
+	width: 10%;
+	text-align: center;
+}
+
+%f-owned-weapons__damage-column {
+	display: table-cell;
+	width: 50%
+}
+
+%s-owned-weapons__cell {
+	padding: 4px;
+	vertical-align: top;
+}
+
+%s-owned-weapons__value {
+	background-color: #ccc;
+	font-size: toRem(16px);
+	border: none;
+	border-radius: 6px;
+	padding: 2px 4px;
+	line-height: 25px;
+	min-height: 25px;
+}
+
+%s-owned-weapons__column-title {
+	font-size: toRem(11px);
+	text-transform: uppercase;
+	padding: 2px;
+}
+
+.c-owned-weapons__name-header {
+	@extend %f-owned-weapons__name-column;
+	@extend %s-owned-weapons__column-title;
+}
+
+.c-owned-weapons__attack-header {
+	@extend %f-owned-weapons__attack-column;
+	@extend %s-owned-weapons__column-title;
+	white-space: nowrap;
+}
+
+.c-owned-weapons__damage-header {
+	@extend %f-owned-weapons__damage-column;
+	@extend %s-owned-weapons__column-title;
+}
+
+.c-owned-weapons__name {
+	@extend %f-owned-weapons__name-column;
+	@extend %s-owned-weapons__cell;
+}
+.c-owned-weapons__attack-bonus {
+	@extend %f-owned-weapons__attack-column;
+	@extend %s-owned-weapons__cell;
+}
+.c-owned-weapons__damage {
+	@extend %f-owned-weapons__damage-column;
+	@extend %s-owned-weapons__cell;
+}
+
+.c-owned-weapons__value {
+	display: inline-block;
+	width: 100%;
+	@extend %s-owned-weapons__value;
+}
+
+%c-owned-weapons__input {
+	width: 100%;
+	font-size: toRem(16px);
+	padding: 2px 4px;
+}
+
+.c-owned-weapons__weapon-input {
+	@extend %c-owned-weapons__input;
+	@extend %s-owned-weapons__value;
+	height: 29px;
+}
+.c-owned-weapons__attack-input {
+	@extend %c-owned-weapons__input;
+	@extend %s-owned-weapons__value;
+	text-align: center;
+}
+.c-owned-weapons__damage-input {
+	@extend %c-owned-weapons__input;
+	@extend %s-owned-weapons__value;
+}
