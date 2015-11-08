@@ -5,6 +5,7 @@ module Entities {
     export class Character {
         public name: string;
         public details: CharacterDetails = {};
+        public personality: Personality = {};
         public abilities: Ability[] = [
             new Ability('Strength', 'Athletics'),
             new Ability('Dexterity', 'Acrobatics', 'Sleight of Hand', 'Stealth'),
@@ -21,6 +22,7 @@ module Entities {
         public hitDice: string;
         public hitDiceUsed: number;
         public temporaryHitpoints: string;
+        public features: string;
 
         public inventory: Inventory = new Inventory();
 
@@ -88,5 +90,12 @@ module Entities {
         playerName?: string;
         race?: string;
         alignment?: string;
+    }
+
+    export interface Personality {
+        traits?: string;
+        ideals?: string;
+        bonds?: string;
+        flaws?: string;
     }
 }

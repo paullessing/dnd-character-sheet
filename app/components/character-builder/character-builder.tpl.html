@@ -115,7 +115,33 @@
             </div>
             <weapons-list character="vm.character"></weapons-list>
         </div>
-        <div class="c-page__column"></div>
+        <div class="c-page__column">
+            <div class="c-page__box">
+                <div class="c-page__row">
+                    <labelled-box label="Personality Traits">
+                        <textarea class="o-ruled-input" ng-model="vm.character.personality.traits"></textarea>
+                    </labelled-box>
+                </div>
+                <div class="c-page__row">
+                    <labelled-box label="Ideals">
+                        <textarea class="o-ruled-input" ng-model="vm.character.personality.ideals"></textarea>
+                    </labelled-box>
+                </div>
+                <div class="c-page__row">
+                    <labelled-box label="Bonds">
+                        <textarea class="o-ruled-input" ng-model="vm.character.personality.bonds"></textarea>
+                    </labelled-box>
+                </div>
+                <div class="c-page__row">
+                    <labelled-box label="Flaws">
+                        <textarea class="o-ruled-input" ng-model="vm.character.personality.flaws"></textarea>
+                    </labelled-box>
+                </div>
+            </div>
+            <labelled-box label="Features & Traits">
+                <textarea class="o-ruled-input" ng-model="vm.character.features"></textarea>
+            </labelled-box>
+        </div>
     </div>
 
 </form>

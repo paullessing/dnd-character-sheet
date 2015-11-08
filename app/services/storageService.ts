@@ -22,6 +22,7 @@ module Services {
                 name: character.name,
                 xp: character.xp,
                 details: character.details,
+                personality: character.personality,
                 deathSaves: character.deathSaves,
                 armorClass: character.armorClass,
                 speed: character.speed,
@@ -31,7 +32,8 @@ module Services {
                 hitDice: character.hitDice,
                 hitDiceUsed: character.hitDiceUsed,
                 abilities: character.abilities.map(abilityToStored),
-                inventory: character.inventory
+                inventory: character.inventory,
+                features: character.features
             }
 
             this.$localStorage.character = data;
@@ -44,7 +46,8 @@ module Services {
                 if (!data) {
                     return character;
                 }
-                character.details = data.details;
+                character.details = data.details || {};
+                character.personality = data.personality || {};
                 character.name = data.name;
                 character.xp = data.xp;
                 character.deathSaves = data.deathSaves;
@@ -57,6 +60,7 @@ module Services {
                 character.hitDiceUsed = data.hitDiceUsed;
                 character.abilities = data.abilities.map(storedToAbility);
                 character.inventory = data.inventory || new Inventory();
+                character.features = data.features;
 
                 return character;
             } catch (e) {

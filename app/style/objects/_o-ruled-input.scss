@@ -1,0 +1,20 @@
+.o-ruled-input {
+	$line-height: 17px;
+	$padding: 5px;
+
+	width: 100%;
+	padding: $padding;
+	min-height: 4 * $line-height + 2 * $padding;
+	resize: vertical;
+
+	border: 0;
+
+	font-family: $font-default;
+	font-size: toRem(13px);
+	line-height: $line-height;
+
+	@include background(linear-gradient(top, white 0, white ($line-height - 1px), #666 ($line-height - 1px)));
+	background-size: 100% $line-height;
+	background-attachment: local;
+	background-origin: content-box;
+}
