@@ -1,0 +1,36 @@
+<header class="c-header">
+    <div class="c-header__name">
+        <label class="o-inline-field o-inline-field--large">
+            <span class="o-inline-field__label">Character Name</span>
+            <input class="o-inline-field__field" ng-model="character.name" type="text" required />
+        </label>
+    </div>
+
+    <div class="c-header__details">
+        <div class="c-header__detail">
+            <personal-detail label="Class"
+                             value="character.details.class"></personal-detail>
+            <div class="o-inline-field o-inline-field--small">
+                <span class="o-inline-field__label">Level</span>
+                <span class="o-inline-field__field " title="XP until next level: {{ character.xpUntilNextLevel }}">{{ character.level }}</span>
+            </div>
+        </div>
+        <personal-detail class="c-header__detail"
+                          label="Background"
+                          value="character.details.background"></personal-detail>
+        <personal-detail class="c-header__detail"
+                          label="Player Name"
+                          value="character.details.playerName"></personal-detail>
+        <personal-detail class="c-header__detail"
+                          label="Race"
+                          value="character.details.race"></personal-detail>
+        <personal-detail class="c-header__detail"
+                          label="Alignment"
+                          value="character.details.alignment"
+                          options="alignments"></personal-detail>
+        <personal-detail class="c-header__detail"
+                          label="Experience Points"
+                          value="character.xp"
+                          type="number"></personal-detail>
+    </div>
+</header>

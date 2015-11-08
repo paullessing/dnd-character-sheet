@@ -2,42 +2,7 @@
 <h1 class="c-title">Character Sheet</h1>
 
 <form name="characterBuilder">
-    <header class="c-header">
-        <div class="c-header__name">
-            <label class="o-inline-field o-inline-field--large">
-                <span class="o-inline-field__label">Character Name</span>
-                <input class="o-inline-field__field" ng-model="vm.character.name" type="text" required />
-            </label>
-        </div>
-
-        <div class="c-header__details">
-            <div class="c-header__detail">
-                <character-detail label="Class"
-                                  value="vm.character.details.class"></character-detail>
-                <div class="o-inline-field o-inline-field--small">
-                    <span class="o-inline-field__label">Level</span>
-                    <span class="o-inline-field__field " title="XP until next level: {{ vm.character.xpUntilNextLevel }}">{{ vm.character.level }}</span>
-                </div>
-            </div>
-            <character-detail class="c-header__detail"
-                              label="Background"
-                              value="vm.character.details.background"></character-detail>
-            <character-detail class="c-header__detail"
-                              label="Player Name"
-                              value="vm.character.details.playerName"></character-detail>
-            <character-detail class="c-header__detail"
-                              label="Race"
-                              value="vm.character.details.race"></character-detail>
-            <character-detail class="c-header__detail"
-                              label="Alignment"
-                              value="vm.character.details.alignment"
-                              options="vm.alignments"></character-detail>
-            <character-detail class="c-header__detail"
-                              label="Experience Points"
-                              value="vm.character.xp"
-                              type="number"></character-detail>
-        </div>
-    </header>
+    <personal-details character="vm.character"></personal-details>
 
     <div class="c-page">
         <div class="c-page__column">

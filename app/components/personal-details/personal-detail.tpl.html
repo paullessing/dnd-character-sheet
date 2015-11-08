@@ -4,8 +4,7 @@
            class="o-inline-field__field" ng-if="!vm.options" required />
     <select ng-model="vm.value" ng-if="vm.options" ng-options="index as choice for (index, choice) in vm.options"
             class="o-inline-field__field"
-            required
-            ng-change="vm.select()">
+            required>
         <option value=""></option>
     </select>
 </label>
