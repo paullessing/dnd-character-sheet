@@ -15,8 +15,6 @@ module CharacterBuilder {
             this.character = this.StorageService.load();
         }
 
-        public alignments = Entities.AlignmentNames;
-
         public isFormValid() {
             return this.$scope.characterBuilder.$valid;
         }

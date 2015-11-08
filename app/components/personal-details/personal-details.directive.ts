@@ -5,8 +5,15 @@ module CharacterBuilder.PersonalDetails {
                 character: "="
             },
             restrict: 'E',
-            templateUrl: "components/personal-details/personal-details.tpl.html"
+            templateUrl: "components/personal-details/personal-details.tpl.html",
+            link: function(scope: PersonalDetailsDirectiveScope) {
+                scope.alignments = Entities.AlignmentNames;
+            }
         };
+    }
+
+    interface PersonalDetailsDirectiveScope extends angular.IScope {
+        alignments: Entities.Alignment[];
     }
 
     angular.module('characterBuilderApp')

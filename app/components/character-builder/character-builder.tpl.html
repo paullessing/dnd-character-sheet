@@ -1,8 +1,8 @@
 <menu character="vm.character" is-valid="vm.isFormValid()"></menu>
 <h1 class="c-title">Character Sheet</h1>
 
-<tabs>
-    <form name="characterBuilder">
+<form name="characterBuilder">
+    <tabs>
 
         <personal-details character="vm.character" tab="Personal Details"></personal-details>
 
@@ -13,5 +13,5 @@
         <labelled-box label="Features & Traits" tab="Features & Traits">
             <textarea class="o-ruled-input" ng-model="vm.character.features"></textarea>
         </labelled-box>
-    </form>
-</tabs>
+    </tabs>
+</form>
