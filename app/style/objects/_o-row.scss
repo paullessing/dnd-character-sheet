@@ -1,0 +1,16 @@
+.o-row {
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: 10px;
+
+	> *:not(:last-child) {
+		margin-right: 10px; // Space between elements
+	}
+
+	@media print {
+		padding: 1px;
+	}
+}

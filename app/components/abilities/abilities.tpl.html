@@ -8,7 +8,8 @@
         <input class="c-ability-property__modifier" type="text" pattern="[+-]?[0-9]+"/>
     </label>
 
-    <ability ng-repeat="ability in character.abilities"
+    <ability class="o-row"
+             ng-repeat="ability in character.abilities"
              ability="ability"
              proficiency-bonus="character.proficiencyBonus"></ability>
 

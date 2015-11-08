@@ -11,12 +11,8 @@ module CharacterBuilder.WeaponsList {
     import OwnedWeapon = Entities.Weapons.OwnedWeapon;
 
     export class WeaponsListDirectiveController {
-        constructor() { console.log(Weapons.StandardWeapons)};
-
         public character: Character;
-
         public weaponChoices = Weapons.StandardWeapons;
-
         public newWeapon: NewWeapon;
 
         public get inventory(): Inventory {

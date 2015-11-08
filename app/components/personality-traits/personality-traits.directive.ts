@@ -11,5 +11,5 @@ module CharacterBuilder.PersonalityTraits {
     }
 
     angular.module('characterBuilderApp')
-        .directive('combatStats', PersonalityTraitsDirective);
+        .directive('personalityTraits', PersonalityTraitsDirective);
 }
