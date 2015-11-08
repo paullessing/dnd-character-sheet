@@ -4,6 +4,7 @@ module CharacterBuilder.Abilities {
             scope: {
                 character: "="
             },
+            replace: true,
             restrict: 'E',
             templateUrl: "components/abilities/abilities.tpl.html"
         };

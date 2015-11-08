@@ -1,0 +1,49 @@
+<div class="o-box">
+    <div class="c-page__row">
+        <labelled-box label="Armor Class" class="c-combat__fixedItem c-combat__fixedItem--shield">
+            <input type="text" pattern="[0-9]+" class="c-combat__fixedValue" ng-model="character.armorClass" required/>
+        </labelled-box>
+        <labelled-box label="Initiative" class="c-combat__fixedItem">
+            <span class="c-combat__fixedValue">{{ character.initiative | modifier }}</span>
+        </labelled-box>
+        <labelled-box label="Speed" class="c-combat__fixedItem">
+            <input type="text" pattern="[0-9]+" class="c-combat__fixedValue" ng-model="character.speed" required/>
+        </labelled-box>
+    </div>
+    <div class="c-page__row">
+        <labelled-box label="Current Hit Points" class="c-hitpoints c-combat__fullItem">
+            <label class="c-combat-counter__limit">
+                            <span class="c-combat-counter__limitLabel">
+                                Hit Point Maximum
+                            </span>
+                <input type="number" class="c-combat-counter__limitInput" ng-model="character.maxHitpoints" required />
+            </label>
+            <div class="c-combat-counter__valueWrapper">
+                <textarea class="c-combat-counter__value c-combat-counter__value--large" ng-model="character.hitpoints"></textarea>
+            </div>
+        </labelled-box>
+    </div>
+    <div class="c-page__row">
+        <labelled-box label="Temporary Hit Points" class="c-temporary-hitpoints c-combat__fullItem">
+            <div class="c-combat-counter__valueWrapper">
+                <textarea class="c-combat-counter__value" ng-model="character.temporaryHitpoints"></textarea>
+            </div>
+        </labelled-box>
+    </div>
+    <div class="c-page__row">
+        <labelled-box label="Hit Dice" class="c-hit-dice c-combat__sharedItem">
+            <label class="c-combat-counter__limit">
+                            <span class="c-combat-counter__limitLabel c-combat-counter__limitLabel--small">
+                                Total
+                            </span>
+                <input type="text" pattern="[0-9]+d[0-9]+" class="c-combat-counter__limitInput" ng-model="character.hitDice" required />
+            </label>
+            <div class="c-combat-counter__valueWrapper">
+                <input type="number" class="c-combat-counter__value" ng-model="character.hitDiceUsed" />
+            </div>
+        </labelled-box>
+        <labelled-box label="Death Saves" class="c-combat__sharedItem">
+            <death-saves value="character.deathSaves"></death-saves>
+        </labelled-box>
+    </div>
+</div>
