@@ -1,5 +1,5 @@
 module CharacterBuilder.PersonalDetails {
-    function PersonalDetailsDirective() {
+    export function PersonalDetailsDirective(): angular.IDirective {
         return {
             scope: {
                 character: "="

@@ -1,0 +1,8 @@
+<div class="c-tabs">
+    <ul class="c-tabs__tab-titles">
+        <li ng-repeat="tabTitle in vm.tabs" class="c-tabs__tab-title" ng-class="{ 'c-tabs__tab-title--active': vm.isActive(tabTitle) }">
+            <a ng-click="vm.select(tabTitle)" class="c-tabs__tab-link">{{ tabTitle }}</a>
+        </li>
+    </ul>
+    <div ng-transclude class="c-tabs__tab-contents"></div>
+</div>

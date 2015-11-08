@@ -1,7 +1,7 @@
 /// <reference path="./ability.ctrl.ts" />
 
 module CharacterBuilder.Abilities {
-    export function AbilityDirective() {
+    export function AbilityDirective(): angular.IDirective {
         return {
             scope: {
                 ability: '=',

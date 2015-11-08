@@ -1,5 +1,5 @@
 module CharacterBuilder.CombatStats {
-    function CombatStatsDirective() {
+    export function CombatStatsDirective(): angular.IDirective {
         return {
             scope: {
                 character: "="

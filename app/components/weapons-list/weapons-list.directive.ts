@@ -2,7 +2,9 @@
 
 module CharacterBuilder.WeaponsList {
     import Inventory = Entities.Inventory;
-    export function WeaponsListDirective() {
+    import IDirective = angular.IDirective;
+
+    export function WeaponsListDirective(): IDirective {
         return {
             scope: {
                 character: '='

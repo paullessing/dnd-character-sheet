@@ -1,5 +1,5 @@
 module CharacterBuilder.Abilities {
-    function AbilitiesDirective() {
+    export function AbilitiesDirective(): angular.IDirective {
         return {
             scope: {
                 character: "="

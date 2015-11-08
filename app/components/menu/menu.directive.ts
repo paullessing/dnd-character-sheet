@@ -1,7 +1,7 @@
 /// <reference path="./menu.ctrl.ts" />
 
 module CharacterBuilder.Menu {
-    export function MenuDirective() {
+    export function MenuDirective(): angular.IDirective {
         return {
             scope: {
                 character: '=',

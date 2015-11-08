@@ -1,7 +1,7 @@
 /// <reference path="./death-saves.ctrl.ts" />
 
 module CharacterBuilder.DeathSaves {
-    export function DeathSavesDirective() {
+    export function DeathSavesDirective(): angular.IDirective {
         return {
             scope: {
                 label: '@',

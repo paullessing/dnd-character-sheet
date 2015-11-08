@@ -1,24 +1,17 @@
 <menu character="vm.character" is-valid="vm.isFormValid()"></menu>
 <h1 class="c-title">Character Sheet</h1>
 
-<form name="characterBuilder">
-    <personal-details character="vm.character"></personal-details>
+<tabs>
+    <form name="characterBuilder">
 
-    <div class="c-page">
-        <div class="c-page__column">
-            <abilities character="vm.character"></abilities>
-        </div>
+        <personal-details character="vm.character" tab="Personal Details"></personal-details>
 
-        <div class="c-page__column">
-            <combat-stats character="vm.character"></combat-stats>
-            <weapons-list character="vm.character"></weapons-list>
-        </div>
-        <div class="c-page__column">
-            <personality-traits character="vm.character"></personality-traits>
-            <labelled-box label="Features & Traits">
-                <textarea class="o-ruled-input" ng-model="vm.character.features"></textarea>
-            </labelled-box>
-        </div>
-    </div>
-
-</form>
+        <abilities character="vm.character" tab="Abilities"></abilities>
+        <combat-stats character="vm.character" tab="Combat"></combat-stats>
+        <weapons-list character="vm.character" tab="Weapons"></weapons-list>
+        <personality-traits character="vm.character" tab="Personality"></personality-traits>
+        <labelled-box label="Features & Traits" tab="Features & Traits">
+            <textarea class="o-ruled-input" ng-model="vm.character.features"></textarea>
+        </labelled-box>
+    </form>
+</tabs>

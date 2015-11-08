@@ -1,7 +1,7 @@
 module Utilities {
     import IScope = angular.IScope;
     import IAttributes = angular.IAttributes;
-    export function LabelledBoxDirective() {
+    export function LabelledBoxDirective(): angular.IDirective {
         return {
             scope: {
                 label: '@'

@@ -1,5 +1,5 @@
 module CharacterBuilder.PersonalityTraits {
-    function PersonalityTraitsDirective() {
+    export function PersonalityTraitsDirective(): angular.IDirective {
         return {
             scope: {
                 character: "="
