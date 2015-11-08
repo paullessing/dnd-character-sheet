@@ -1,0 +1,20 @@
+<div class="o-box">
+    <div class="c-ability-property">
+        <span class="c-ability-property__label" title="Based on the current level">Proficiency Bonus</span>
+        <span class="c-ability-property__modifier">{{ character.proficiencyBonus | modifier }}</span>
+    </div>
+    <label class="c-ability-property">
+        <span class="c-ability-property__label" title="Defined by the GM">Inspiration</span>
+        <input class="c-ability-property__modifier" type="text" pattern="[+-]?[0-9]+"/>
+    </label>
+
+    <ability ng-repeat="ability in character.abilities"
+             ability="ability"
+             proficiency-bonus="character.proficiencyBonus"></ability>
+
+    <div class="c-ability-property">
+                <span class="c-ability-property__label"
+                      title="10 + Perception modifier">Passive Wisdom (Perception)</span>
+        <span class="c-ability-property__modifier">{{ character.passiveWisdom }}</span>
+    </div>
+</div>

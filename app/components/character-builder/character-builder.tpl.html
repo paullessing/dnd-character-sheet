@@ -6,30 +6,12 @@
 
     <div class="c-page">
         <div class="c-page__column">
-            <div class="c-page__box">
-                <div class="c-ability-property">
-                    <span class="c-ability-property__label" title="Based on the current level">Proficiency Bonus</span>
-                    <span class="c-ability-property__modifier">{{ vm.character.proficiencyBonus | modifier }}</span>
-                </div>
-                <label class="c-ability-property">
-                    <span class="c-ability-property__label" title="Defined by the GM">Inspiration</span>
-                    <input class="c-ability-property__modifier" type="text" pattern="[+-]?[0-9]+"/>
-                </label>
-
-                <ability ng-repeat="ability in vm.character.abilities"
-                         ability="ability"
-                         proficiency-bonus="vm.character.proficiencyBonus"></ability>
-
-                <div class="c-ability-property">
-                <span class="c-ability-property__label"
-                      title="10 + Perception modifier">Passive Wisdom (Perception)</span>
-                    <span class="c-ability-property__modifier">{{ vm.character.passiveWisdom }}</span>
-                </div>
-            </div>
+            <abilities character="vm.character"></abilities>
         </div>
 
-        <div class="c-page__column c-combat">
-            <div class="c-page__box">
+        <div class="c-page__column">
+            <combat-stats character="vm.character"></combat-stats>
+            <div class="o-box">
                 <div class="c-page__row">
                     <labelled-box label="Armor Class" class="c-combat__fixedItem c-combat__fixedItem--shield">
                         <input type="text" pattern="[0-9]+" class="c-combat__fixedValue" ng-model="vm.character.armorClass" required/>
@@ -81,7 +63,7 @@
             <weapons-list character="vm.character"></weapons-list>
         </div>
         <div class="c-page__column">
-            <div class="c-page__box">
+            <div class="o-box">
                 <div class="c-page__row">
                     <labelled-box label="Personality Traits">
                         <textarea class="o-ruled-input" ng-model="vm.character.personality.traits"></textarea>
