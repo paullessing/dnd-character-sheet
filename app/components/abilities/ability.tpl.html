@@ -1,7 +1,7 @@
 <div class="c-abilityRow">
     <labelled-box label="{{ vm.ability.name }}" class="c-ability">
         <p class="c-ability__modifier">
-            <input type="text" pattern="[0-9+-]*" ng-model="vm.ability.points"
+            <input type="text" pattern="[0-9+-]*" ng-model="vm.ability.score"
                    required
                    class="c-ability__value" />
             {{ vm.ability.modifier | modifier }}
@@ -10,7 +10,7 @@
     <ul class="c-skills">
         <li ng-repeat="skill in vm.ability.skills" class="c-skills__item">
             <input fake-checkbox type="checkbox" ng-model="skill.isProficient" class="c-skills__proficiency" ng-class="{ 'o-fake-checkbox--special': $index === 0 }" />
-            <span class="c-skills__modifier">{{ vm.getModifier(skill) | modifier }}</span>
+            <span class="c-skills__modifier">{{ skill.modifier | modifier }}</span>
             <span class="c-skills__name">{{ skill.name }}</span>
         </li>
     </ul>

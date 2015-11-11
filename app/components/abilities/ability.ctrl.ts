@@ -3,9 +3,9 @@
 
 module CharacterBuilder.Abilities {
     import IScope = angular.IScope;
-    import Ability = Entities.Ability;
     import Character = Entities.Character;
     import Skill = Entities.Skill;
+    import Ability2 = Entities.Ability;
 
     export class AbilityDirectiveController {
         constructor(private $scope: IScope) {
@@ -13,7 +13,7 @@ module CharacterBuilder.Abilities {
 
         public character: Character;
         public points: string;
-        public ability: Ability;
+        public ability: Ability2;
         public proficiencyBonus: number;
 
         public getModifier(skill: Skill): number {

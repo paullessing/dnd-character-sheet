@@ -4,8 +4,7 @@ module CharacterBuilder.Abilities {
     export function AbilityDirective(): angular.IDirective {
         return {
             scope: {
-                ability: '=',
-                proficiencyBonus: '='
+                ability: '='
             },
             replace: true,
             restrict: 'E',

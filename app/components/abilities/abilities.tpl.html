@@ -9,9 +9,8 @@
     </label>
 
     <ability class="o-row"
-             ng-repeat="ability in character.abilities"
-             ability="ability"
-             proficiency-bonus="character.proficiencyBonus"></ability>
+             ng-repeat="ability in character.abilities.list"
+             ability="ability"></ability>
 
     <div class="c-ability-property">
                 <span class="c-ability-property__label"
