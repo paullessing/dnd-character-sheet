@@ -1,3 +1,3 @@
 /// <reference path="../typings/tsd.d.ts" />
 
-angular.module('characterBuilderApp', ['ngStorage']);
+angular.module('characterBuilderApp', ['ngStorage', 'btford.modal']);
