@@ -6,14 +6,24 @@ module Entities {
         private _intelligence: Ability;
         private _wisdom: Ability;
         private _charisma: Ability;
+        private abilitiesByName: { [name: string]: Ability };
 
         constructor(private dto: AbilitiesDto, private getProficiencyBonus: NumericGetter) {
-            this._strength = strength(getProficiencyBonus, this.getDto('strength')),
-            this._dexterity = dexterity(getProficiencyBonus, this.getDto('dexterity')),
-            this._constitution = constitution(getProficiencyBonus, this.getDto('constitution')),
-            this._intelligence = intelligence(getProficiencyBonus, this.getDto('intelligence')),
-            this._wisdom = wisdom(getProficiencyBonus, this.getDto('wisdom')),
-            this._charisma = charisma(getProficiencyBonus, this.getDto('charisma'))
+            this.abilitiesByName = {};
+
+            this._strength     = this.getOrCreateAbility('Strength',     'Athletics');
+            this._dexterity    = this.getOrCreateAbility('Dexterity',    'Acrobatics', 'Sleight of Hand', 'Stealth');
+            this._constitution = this.getOrCreateAbility('Constitution', 'Acrobatics', 'Sleight of Hand', 'Stealth');
+            this._intelligence = this.getOrCreateAbility('Intelligence', 'Arcana', 'History', 'Investigation', 'Nature', 'Religion');
+            this._wisdom       = this.getOrCreateAbility('Wisdom',       'Animal Handling', 'Insight', 'Medicine', 'Perception', 'Survival');
+            this._charisma     = this.getOrCreateAbility('Charisma',     'Deception', 'Intimidation', 'Performance', 'Persuasion');
+        }
+
+        private getOrCreateAbility(name: string, ...skillNames: string[]) {
+            var dto = (this.dto[name] = this.dto[name] || {});
+            var ability = new Ability(name, this.getProficiencyBonus, dto, ...skillNames);
+            this.abilitiesByName[name] = ability;
+            return ability;
         }
 
         public get strength(): Ability {
@@ -35,11 +45,8 @@ module Entities {
             return this._charisma;
         }
 
-        private getDto(name): AbilityDto {
-            if (!this.dto[name]) {
-                this.dto[name] = {};
-            }
-            return this.dto[name];
+        private getAbility(name: string){
+            return this.abilitiesByName[name];
         }
 
         public get list(): Ability[] {
@@ -49,35 +56,37 @@ module Entities {
         }
     }
 
+    export class ModificationInProgress {
+        public currentValue: number;
+        public timesProficiencyBonusApplied: number;
+
+        constructor(public startValue: number, public isProficient: boolean, public proficiencyBonus: number) {
+            this.currentValue = startValue;
+            this.timesProficiencyBonusApplied = 0;
+        }
+
+        public applyProficiency(ignoreMultiple?: boolean) {
+            if (ignoreMultiple || this.timesProficiencyBonusApplied < 1) {
+                this.currentValue += this.proficiencyBonus;
+            }
+        }
+    }
+
+    export abstract class SkillModifier {
+        constructor(public ability: string, public skill: string) {}
+        public abstract apply(modification: ModificationInProgress): void;
+    }
+
     export type AbilitiesDto = { [name: string]: AbilityDto };
 
-    function strength(getProficiencyBonus: NumericGetter, dto: AbilityDto): Ability {
-        return new Ability('Strength', getProficiencyBonus, dto, 'Athletics');
-    }
-
-    function dexterity(getProficiencyBonus: NumericGetter, dto: AbilityDto) {
-        return new Ability('Dexterity', getProficiencyBonus, dto, 'Acrobatics', 'Sleight of Hand', 'Stealth');
-    }
-
-    function constitution(getProficiencyBonus: NumericGetter, dto: AbilityDto) {
-        return new Ability('Constitution', getProficiencyBonus, dto, 'Acrobatics', 'Sleight of Hand', 'Stealth');
-    }
-
-    function intelligence(getProficiencyBonus: NumericGetter, dto: AbilityDto) {
-        return new Ability('Intelligence', getProficiencyBonus, dto, 'Arcana', 'History', 'Investigation', 'Nature', 'Religion');
-    }
-
-    function wisdom(getProficiencyBonus: NumericGetter, dto: AbilityDto) {
-        return new Ability('Wisdom', getProficiencyBonus, dto, 'Animal Handling', 'Insight', 'Medicine', 'Perception', 'Survival');
-    }
-
-    function charisma(getProficiencyBonus: NumericGetter, dto: AbilityDto) {
-        return new Ability('Charisma', getProficiencyBonus, dto, 'Deception', 'Intimidation', 'Performance', 'Persuasion');
+    function ensureRange(score: number) {
+        return score < 0 ? 0 : score > 20 ? 20 : score;
     }
 
     export class Ability {
         private _skills: Skill[];
         private _modifier: number;
+        private skillModifiers: { [name: string]: SkillModifier[] } = {};
 
         constructor(
             private _name: string,
@@ -98,9 +107,27 @@ module Entities {
             this.score = dto.score; // ensure complex setter is called
         }
 
+        public addSkillModifier(modifier: SkillModifier) {
+            if (modifier.ability === this._name) {
+                if (this.skillModifiers[modifier.skill]) {
+                } else {
+                    this.skillModifiers[modifier.skill] = [modifier];
+                }
+            }
+        }
+
         private getModifier(skillName: string, isProficient: boolean): number {
-            // TODO perform a lookup on the skill name
-            return this._modifier + (isProficient ? this.getProficiencyBonus() : 0);
+            var modification = new ModificationInProgress(this.modifier, isProficient, this.getProficiencyBonus());
+
+            if (isProficient) {
+                modification.applyProficiency();
+            }
+
+            var modifiers: SkillModifier[] = this.skillModifiers[skillName] || [];
+
+            modifiers.forEach(modifier => modifier.apply(modification));
+
+            return modification.currentValue;
         }
 
         public get skills(): Skill[] {
@@ -108,9 +135,10 @@ module Entities {
         }
 
         public get score(): number | string {
-            return this.dto.score;
+            return ensureRange(this.dto.score);
         }
 
+        // TODO ensure that when a user enters a too-high score, it reflects the change to the limit in the derived values
         public set score(score: number | string) {
             var scoreAsNumber: number;
             if (typeof score === 'string') {
@@ -119,7 +147,7 @@ module Entities {
                     scoreAsNumber = null;
                 }
             } else {
-                scoreAsNumber = score;
+                scoreAsNumber = ensureRange(score);
             }
             this.dto.score = scoreAsNumber;
             this._modifier = this.getAbilityModifier(scoreAsNumber);
