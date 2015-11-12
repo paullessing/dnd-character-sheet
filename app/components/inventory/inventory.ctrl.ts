@@ -7,8 +7,10 @@ module CharacterBuilder.Inventory {
     import Inventory = Entities.Inventory;
 
     export class InventoryDirectiveController {
+        constructor(private inventoryAddItemModal: angularModal.AngularModal) {}
 
         public openAddItem() {
+            this.inventoryAddItemModal.activate();
         }
     }
 

@@ -6,7 +6,6 @@ module Utilities {
         return {
             restrict: 'A',
             link: function(scope, element, attributes) {
-                console.log("Linking ng-click", element.prop('tagName').toLowerCase(), attributes['href']);
                 if (element.prop('tagName').toLowerCase() === 'a' && !attributes['href']) {
                     element.attr('href', 'javascript:void(0)');
                 }
