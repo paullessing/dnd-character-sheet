@@ -1,8 +1,8 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
-  "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
+  "name": "dnd-character-sheet",
+  "description": "Character Sheet for Dungeons & Dragons 5th Edition",
+  "version": "0.0.1",
+  "homepage": "https://github.com/paullessing/dnd-character-sheet",
   "license": "MIT",
   "private": true,
   "dependencies": {
