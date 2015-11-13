@@ -1,9 +1,20 @@
-module CharacterBuilder.Inventory {
+///<reference path="inventory.ctrl.ts"/>
+
+module CharacterBuilder.Modal {
     export class AddItemModalController {
-        constructor(private inventoryAddItemModal: angularModal.AngularModal) {}
+        static $inject = ['modalWindow'];
+        constructor(private modalWindow: ModalWindow<void>) {
+        }
+
+        public submit() {
+            this.modalWindow.complete();
+        }
 
         public close() {
-            this.inventoryAddItemModal.deactivate();
+            this.modalWindow.abort();
         }
     }
+
+    angular.module('characterBuilderApp')
+        .controller('AddItemModalController', AddItemModalController);
 }
