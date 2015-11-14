@@ -36,9 +36,10 @@ module CharacterBuilder.Modal {
                         .then(response => response.data);
                 }
             }).then(html => {
-                return angular.element(`<modal-window>${html}</modal-window>`);
+                return angular.element(`<modal-window element="modalWindow">${html}</modal-window>`);
             }).then(element => {
-                var scope = this.$rootScope.$new(true); // Create an isolate scope
+                var scope = this.$rootScope.$new(true) as ModalWindowScope<T>; // Create an isolate scope
+                scope.modalWindow = modalWindow;
                 var locals: any = {
                     $scope: scope,
                     modalWindow: modalWindow
@@ -57,6 +58,10 @@ module CharacterBuilder.Modal {
 
             return this.modalWindowFactory(construct);
         }
+    }
+
+    export interface ModalWindowScope<T> extends angular.IScope {
+        modalWindow: ModalWindow<T>;
     }
 
     angular.module('characterBuilderApp')
