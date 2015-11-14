@@ -28,8 +28,6 @@ module CharacterBuilder.Modal {
             this.loader(this).then((element: JQueryElement) => {
                 this.element = element;
 
-                console.log(element);
-
                 element.appendTo(angular.element(document.body));
             });
             return this.deferred.promise;

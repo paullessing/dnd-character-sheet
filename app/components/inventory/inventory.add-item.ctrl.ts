@@ -1,13 +1,23 @@
-///<reference path="inventory.ctrl.ts"/>
+/// <reference path="inventory.ctrl.ts"/>
+/// <reference path="../../entities/inventory.ts" />
 
 module CharacterBuilder.Modal {
+    import ItemDto = Entities.ItemDto;
+    import Item = Entities.Item;
     export class AddItemModalController {
+
+        public item: ItemDto = {
+            name: null,
+            weight: null,
+            count: 1
+        };
+
         static $inject = ['modalWindow'];
-        constructor(private modalWindow: ModalWindow<void>) {
+        constructor(private modalWindow: ModalWindow<Item>) {
         }
 
         public submit() {
-            this.modalWindow.complete();
+            this.modalWindow.complete(new Item(this.item));
         }
 
         public close() {

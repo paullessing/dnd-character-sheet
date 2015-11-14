@@ -1,5 +1,10 @@
 <div class="c-inventory">
     <labelled-box label="Inventory">
         <button ng-click="vm.openAddItem()">Add Item</button>
+        <ol>
+            <li ng-repeat="item in vm.character.inventory.items">
+                {{ item.name }} &times;{{ item.count }} @{{ item.weight }}lb
+            </li>
+        </ol>
     </labelled-box>
 </div>

@@ -7,19 +7,23 @@ module Entities {
         private _personality: Personality;
         private _abilities: Abilities;
         private _proficiencyBonus: number;
+        private _inventory: Inventory;
 
         constructor(private dto?: CharacterDto) {
+            console.log("Creating character with dto:", dto)
             if (!dto) {
                 this.dto = {
                     xp: 0,
                     details: {},
                     personality: {},
-                    abilities: {}
+                    abilities: {},
+                    inventory: {}
                 };
             }
             this._details = new CharacterDetails(this.dto.details);
             this._personality = new Personality(this.dto.personality);
             this._abilities = new Abilities(this.dto.abilities, () => this.proficiencyBonus);
+            this._inventory = new Inventory(this.dto.inventory);
             this.xp = this.dto.xp; // Ensure complex setter is called
         }
 
@@ -50,6 +54,9 @@ module Entities {
         }
         public get abilities(): Abilities {
             return this._abilities;
+        }
+        public get inventory(): Inventory {
+            return this._inventory;
         }
 
         public get armorClass(): number {
@@ -107,9 +114,6 @@ module Entities {
         public set features(features: string) {
             this.dto.features = features;
         }
-
-
-        public inventory: Inventory = new Inventory();
 
         public get proficiencyBonus(): number {
             return this._proficiencyBonus;
@@ -242,6 +246,7 @@ module Entities {
         details: CharacterDetailsDto;
         personality: PersonalityDto;
         abilities: AbilitiesDto;
+        inventory: InventoryDto;
         armorClass?: number;
         speed?: number;
         maxHitpoints?: number;

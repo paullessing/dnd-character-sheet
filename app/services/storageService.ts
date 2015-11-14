@@ -25,6 +25,7 @@ module Services {
                 var dto = this.$localStorage.character || {};
                 return new Character(dto);
             } catch (e) {
+                console.warn(e);
                 return new Character();
             }
         }

@@ -9,17 +9,20 @@ module CharacterBuilder.Inventory {
     import ModalWindow = CharacterBuilder.Modal.ModalWindow;
     import ModalWindowService = CharacterBuilder.Modal.ModalWindowService;
     import AddItemModalController = CharacterBuilder.Modal.AddItemModalController;
+    import Item = Entities.Item;
 
     export class InventoryDirectiveController {
-        //constructor(private inventoryAddItemModal: angularModal.AngularModal) {}
+        public character: Character;
+
         constructor(private modalWindowService: ModalWindowService) {}
 
         public openAddItem() {
-            this.modalWindowService.createModal({
+            this.modalWindowService.createModal<Item>({
                 controller: 'AddItemModalController',
                 controllerAs: 'vm',
                 templateUrl: 'components/inventory/inventory.add-item.tpl.html'
-            }).show().then(() => {
+            }).show().then((item: Item) => {
+                this.character.inventory.addItem(item);
                 console.log("Done");
             }, () => {
                 console.log("Failed");
