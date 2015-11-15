@@ -1,4 +1,3 @@
-/// <reference path="inventory.ctrl.ts"/>
 /// <reference path="../../entities/inventory.ts" />
 
 module CharacterBuilder.Modal {

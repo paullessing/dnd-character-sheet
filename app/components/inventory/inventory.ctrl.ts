@@ -3,14 +3,16 @@
 /// <reference path="../../entities/weapon.ts" />
 /// <reference path="../modal-window/modal-window.service.ts" />
 /// <reference path="inventory.change-quantity.ctrl.ts" />
+/// <reference path="inventory.add-item.ctrl.ts" />
 
 module CharacterBuilder.Inventory {
+    import Item = Entities.Item;
     import Character = Entities.Character;
     import Inventory = Entities.Inventory;
     import ModalWindow = CharacterBuilder.Modal.ModalWindow;
     import ModalWindowService = CharacterBuilder.Modal.ModalWindowService;
     import AddItemModalController = CharacterBuilder.Modal.AddItemModalController;
-    import Item = Entities.Item;
+    import ChangeQuantityModalController = CharacterBuilder.Modal.ChangeQuantityModalController;
 
     export class InventoryDirectiveController {
         public character: Character;
@@ -19,7 +21,7 @@ module CharacterBuilder.Inventory {
 
         public openAddItem() {
             this.modalWindowService.createModal<Item>({
-                controller: 'AddItemModalController',
+                controller: AddItemModalController,
                 controllerAs: 'vm',
                 templateUrl: 'components/inventory/inventory.add-item.tpl.html'
             }).show().then((item: Item) => {
@@ -32,7 +34,7 @@ module CharacterBuilder.Inventory {
 
         public editCount(item: Item) {
             this.modalWindowService.createModal<number>({
-                controller: 'ChangeQuantityModalController',
+                controller: ChangeQuantityModalController,
                 controllerAs: 'vm',
                 templateUrl: 'components/inventory/inventory.change-quantity.tpl.html',
                 values: { item: item }

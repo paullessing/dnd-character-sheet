@@ -72,9 +72,10 @@ module Entities {
         }
     }
 
-    export abstract class SkillModifier {
-        constructor(public ability: string, public skill: string) {}
-        public abstract apply(modification: ModificationInProgress): void;
+    export interface SkillModifier {
+        ability: string;
+        skill: string
+        apply(modification: ModificationInProgress): void;
     }
 
     export type AbilitiesDto = { [name: string]: AbilityDto };
