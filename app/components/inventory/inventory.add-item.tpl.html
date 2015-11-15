@@ -1,4 +1,4 @@
-<div style="width: 250px; height: 200px; font-size: 20px;">
+<div style="width: 350px; height: 400px; resize: both, font-size: 14px;">
     <h2>{{ vm.isEdit ? 'Edit' : 'Create New' }} Item</h2>
     <a ng-click="vm.close()">Close</a>
 
@@ -17,6 +17,13 @@
             weight: <input type="number" ng-model="vm.item.weight"  min="0" step="0.01" />
         </label>
     </div>
+
+    <div ng-repeat="modifier in vm.item.modifiers">
+        <span ng-if="modifier.isProficiencyModifier">{{ modifier.canStackProficiency ? 'Adds' : 'Gives' }} proficiency in</span>
+        {{ modifier.skill || modifier.ability }}
+        <span ng-if="modifier.amount">{{ modifier.amount | modifier }}</span>
+    </div>
+    <modifier-form on-complete="vm.addModifier(modifier)"></modifier-form>
 
     <button ng-click="vm.submit()">Submit</button>
 </div>

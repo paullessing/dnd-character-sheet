@@ -1,0 +1,19 @@
+<div>
+    <select ng-options="item as item.label for item in vm.modifierChoices" ng-model="vm.selectedModifier">
+        <option value="">Choose an ability or skill</option>
+    </select>
+    <div ng-if="vm.selectedModifier.skill">
+        <label>
+            <input type="checkbox" ng-model="vm.options.isProficiencyModifier" /> Use Proficiency Modifier?
+        </label><br />
+        <label ng-if="vm.options.isProficiencyModifier">
+            <input type="checkbox" ng-model="vm.options.canStackProficiency" /> Apply proficiency more than once?
+        </label>
+    </div>
+    <div ng-if="!vm.selectedModifier.skill || !vm.options.isProficiencyModifier">
+        <label>
+            <input type="number" min="0" step="1" ng-model="vm.options.amount" /> Modifier amount
+        </label>
+    </div>
+    <button ng-click="vm.onSubmit()">Add</button>
+</div>

@@ -3,12 +3,16 @@
 module CharacterBuilder.Modal {
     import ItemDto = Entities.ItemDto;
     import Item = Entities.Item;
+    import ModifierDto = CharacterBuilder.Inventory.ModifierDto;
     export class AddItemModalController {
+
+        public modifiers: ModifierDto[] = [];
 
         public item: ItemDto = {
             name: null,
             weight: null,
-            count: 1
+            count: 1,
+            modifiers: []
         };
 
         static $inject = ['modalWindow'];
@@ -21,6 +25,10 @@ module CharacterBuilder.Modal {
 
         public close() {
             this.modalWindow.abort();
+        }
+
+        public addModifier(modifier: ModifierDto) {
+            this.item.modifiers.push(modifier);
         }
     }
 

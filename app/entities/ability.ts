@@ -1,4 +1,38 @@
 module Entities {
+    export interface AbilityDefinition {
+        name: string;
+        skills: string[];
+    }
+
+    export const AbilityDefinitions: AbilityDefinition[] = [
+        {
+            name: 'Strength',
+            skills: ['Saving Throws', 'Athletics']
+        },
+        {
+            name: 'Dexterity',
+            skills: ['Saving Throws', 'Acrobatics', 'Sleight of Hand', 'Stealth']
+        },
+        {
+            name: 'Constitution',
+            skills: ['Saving Throws']
+        },
+        {
+            name: 'Intelligence',
+            skills: ['Saving Throws', 'Arcana', 'History', 'Investigation', 'Nature', 'Religion']
+        },
+        {
+            name: 'Wisdom',
+            skills: ['Saving Throws', 'Animal Handling', 'Insight', 'Medicine', 'Perception', 'Survival']
+        },
+        {
+            name: 'Charisma',
+            skills: ['Saving Throws', 'Deception', 'Intimidation', 'Performance', 'Persuasion']
+        }
+    ];
+
+    type AbilityMap = { [name: string]: Ability };
+
     export class Abilities {
         private _strength: Ability;
         private _dexterity: Ability;
@@ -6,24 +40,38 @@ module Entities {
         private _intelligence: Ability;
         private _wisdom: Ability;
         private _charisma: Ability;
-        private abilitiesByName: { [name: string]: Ability };
+        private abilitiesByName: AbilityMap;
 
         constructor(private dto: AbilitiesDto, private getProficiencyBonus: NumericGetter) {
-            this.abilitiesByName = {};
+            this.abilitiesByName = this.createAbilities();
 
-            this._strength     = this.getOrCreateAbility('Strength',     'Athletics');
-            this._dexterity    = this.getOrCreateAbility('Dexterity',    'Acrobatics', 'Sleight of Hand', 'Stealth');
-            this._constitution = this.getOrCreateAbility('Constitution', 'Acrobatics', 'Sleight of Hand', 'Stealth');
-            this._intelligence = this.getOrCreateAbility('Intelligence', 'Arcana', 'History', 'Investigation', 'Nature', 'Religion');
-            this._wisdom       = this.getOrCreateAbility('Wisdom',       'Animal Handling', 'Insight', 'Medicine', 'Perception', 'Survival');
-            this._charisma     = this.getOrCreateAbility('Charisma',     'Deception', 'Intimidation', 'Performance', 'Persuasion');
+            this._strength     = this.abilitiesByName['Strength'];
+            this._dexterity    = this.abilitiesByName['Dexterity'];
+            this._constitution = this.abilitiesByName['Constitution'];
+            this._intelligence = this.abilitiesByName['Intelligence'];
+            this._wisdom       = this.abilitiesByName['Wisdom'];
+            this._charisma     = this.abilitiesByName['Charisma'];
         }
 
-        private getOrCreateAbility(name: string, ...skillNames: string[]) {
-            var dto = (this.dto[name] = this.dto[name] || {});
-            var ability = new Ability(name, this.getProficiencyBonus, dto, ...skillNames);
-            this.abilitiesByName[name] = ability;
-            return ability;
+        private createAbilities(): AbilityMap {
+            var abilities: AbilityMap = {};
+            AbilityDefinitions.forEach(abilityDef => {
+                var name = abilityDef.name;
+                var dto = (this.dto[name] = this.dto[name] || {});
+                var ability = new Ability(abilityDef, dto, this.getProficiencyBonus);
+                abilities[name] = ability;
+            });
+            return abilities;
+        }
+
+        public setModifiers(modifiers: AbilityModifier[]) {
+            angular.forEach(this.abilitiesByName, ability => ability.clearModifiers());
+            modifiers.forEach(modifier => {
+                var ability = this.abilitiesByName[modifier.ability];
+                if (ability) {
+                    ability.addModifier(modifier);
+                }
+            });
         }
 
         public get strength(): Ability {
@@ -50,9 +98,7 @@ module Entities {
         }
 
         public get list(): Ability[] {
-            return [
-                this.strength, this.dexterity, this.constitution, this.intelligence, this.wisdom, this.charisma
-            ];
+            return AbilityDefinitions.map(def => this.abilitiesByName[def.name]);
         }
     }
 
@@ -72,9 +118,9 @@ module Entities {
         }
     }
 
-    export interface SkillModifier {
+    export interface AbilityModifier {
         ability: string;
-        skill: string
+        skill?: string;
         apply(modification: ModificationInProgress): void;
     }
 
@@ -87,15 +133,15 @@ module Entities {
     export class Ability {
         private _skills: Skill[];
         private _modifier: number;
-        private skillModifiers: { [name: string]: SkillModifier[] } = {};
+        private skillModifiers: { [name: string]: AbilityModifier[] } = {};
+        private abilityModifiers: AbilityModifier[] = [];
 
         constructor(
-            private _name: string,
-            private getProficiencyBonus: NumericGetter,
+            private abilityDef: AbilityDefinition,
             private dto: AbilityDto,
-            ...skillNames: String[]) {
+            private getProficiencyBonus: NumericGetter) {
             dto.skills = dto.skills || {};
-            this._skills = ['Saving Throws'].concat(skillNames as string[])
+            this._skills = abilityDef.skills
                 .map(name => ({ name: name, isProficient: false } as SkillDto))
                 .map(skillDto => {
                     let skillName = skillDto.name;
@@ -108,13 +154,21 @@ module Entities {
             this.score = dto.score; // ensure complex setter is called
         }
 
-        public addSkillModifier(modifier: SkillModifier) {
-            if (modifier.ability === this._name) {
-                if (this.skillModifiers[modifier.skill]) {
+        public addModifier(modifier: AbilityModifier) {
+            if (modifier.ability === this.abilityDef.name) {
+                if (!modifier.skill) {
+                    this.abilityModifiers.push(modifier);
+                } else if (this.skillModifiers[modifier.skill]) {
+                    this.skillModifiers[modifier.skill].push(modifier);
                 } else {
                     this.skillModifiers[modifier.skill] = [modifier];
                 }
             }
+        }
+
+        public clearModifiers() {
+            this.skillModifiers = {};
+            this.abilityModifiers = [];
         }
 
         private getModifier(skillName: string, isProficient: boolean): number {
@@ -124,7 +178,7 @@ module Entities {
                 modification.applyProficiency();
             }
 
-            var modifiers: SkillModifier[] = this.skillModifiers[skillName] || [];
+            var modifiers: AbilityModifier[] = this.skillModifiers[skillName] || [];
 
             modifiers.forEach(modifier => modifier.apply(modification));
 
@@ -159,11 +213,15 @@ module Entities {
         }
 
         public get modifier(): number {
-            return this._modifier;
+            var modification = new ModificationInProgress(this._modifier, false, 0); // No proficiency bonuses for abilities
+
+            this.abilityModifiers.forEach(modifier => modifier.apply(modification));
+
+            return modification.currentValue;
         }
 
         public get name(): string {
-            return this._name;
+            return this.abilityDef.name;
         }
 
         public getSkill(skillName: string): Skill {

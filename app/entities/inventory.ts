@@ -1,14 +1,15 @@
+/// <reference path="modifier.ts" />
+
 module Entities {
     import OwnedWeapon = Entities.Weapons.OwnedWeapon;
     import Amount = Finance.Amount;
-    import SkillModifierDto = CharacterBuilder.Inventory.SkillModifierDto;
-    import AbilityModifierDto = CharacterBuilder.Inventory.AbilityModifierDto;
-    import fromSkillModifierDto = CharacterBuilder.Inventory.fromSkillModifierDto;
+    import ModifierDto = CharacterBuilder.Inventory.ModifierDto;
+    import fromModifierDto = CharacterBuilder.Inventory.fromModifierDto;
 
     export class Inventory {
         private _items: Item[];
 
-        constructor(private dto: InventoryDto) {
+        constructor(private dto: InventoryDto, private onModifiersChanged: () => void) {
             this._items = (dto.items = dto.items || []).map(itemDto => {
                 var item = new Item(itemDto);
                 item.addCountUpdateListener(item => this.onCountUpdate(item));
@@ -27,6 +28,9 @@ module Entities {
             if (index >= 0) {
                 this._items.splice(index, 1);
                 this.dto.items.splice(index, 1);
+                if (item.modifiers && item.modifiers.length) {
+                    this.onModifiersChanged();
+                }
             }
         }
 
@@ -50,22 +54,25 @@ module Entities {
             this.dto.items.push(item.dto);
             this._items.push(item);
             item.addCountUpdateListener(item => this.onCountUpdate(item));
+            if (item.modifiers && item.modifiers.length) {
+                this.onModifiersChanged(); // TODO investigate the flux pattern
+            }
         }
 
-        public get skillModifiers(): SkillModifier[] {
-            var modifiers: SkillModifier[] = [];
-            return [].concat.apply([], this._items.map(item => item.skillModifiers)); // flatMap
+        public get skillModifiers(): AbilityModifier[] {
+            var modifiers: AbilityModifier[] = [];
+            return [].concat.apply([], this._items.map(item => item.modifiers)); // flatMap
         }
     }
 
 
     export class Item {
         private countUpdateListeners: ItemListener[] = [];
-        private _skillModifiers: SkillModifier[] = [];
+        private _modifiers: AbilityModifier[] = [];
 
         constructor(public dto: ItemDto) {
-            if (dto.skillModifiers) {
-                this._skillModifiers = dto.skillModifiers.map(fromSkillModifierDto);
+            if (dto.modifiers) {
+                this._modifiers = dto.modifiers.map(fromModifierDto);
             }
         }
 
@@ -90,8 +97,8 @@ module Entities {
             this.countUpdateListeners.push(listener);
         }
 
-        public get skillModifiers(): SkillModifier[] {
-            return this._skillModifiers.slice(); // Defensive copy
+        public get modifiers(): AbilityModifier[] {
+            return this._modifiers.slice(); // Defensive copy
         }
     }
 
@@ -101,8 +108,7 @@ module Entities {
         name: string;
         weight: number;
         count: number;
-        skillModifiers?: SkillModifierDto[];
-        abilityModifiers?: AbilityModifierDto[];
+        modifiers?: ModifierDto[];
     }
 
     export interface InventoryDto {
