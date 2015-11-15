@@ -1,0 +1,18 @@
+<div style="width: 250px; height: 200px; font-size: 20px;">
+    <h2>Change quantity of {{ vm.item.name }}</h2>
+
+    <div>
+        <button ng-click="vm.change(-1, true)">Remove 1</button>
+        <button ng-click="vm.change(1, true)">Add 1</button>
+    </div>
+
+    <div>
+        <button ng-click="vm.change(-10)">-10</button>
+        <button ng-click="vm.change(-1)">-1</button>
+        <input ng-model="vm.count" type="number" step="1" min="0" />
+        <button ng-click="vm.change(1)">+1</button>
+        <button ng-click="vm.change(10)">+10</button>
+    </div>
+
+    <button ng-click="vm.submit()">Submit</button>
+</div>

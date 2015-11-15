@@ -2,6 +2,7 @@
 /// <reference path="../../entities/inventory.ts" />
 /// <reference path="../../entities/weapon.ts" />
 /// <reference path="../modal-window/modal-window.service.ts" />
+/// <reference path="inventory.change-quantity.ctrl.ts" />
 
 module CharacterBuilder.Inventory {
     import Character = Entities.Character;
@@ -26,6 +27,17 @@ module CharacterBuilder.Inventory {
                 console.log("Done");
             }, () => {
                 console.log("Failed");
+            });
+        }
+
+        public editCount(item: Item) {
+            this.modalWindowService.createModal<number>({
+                controller: 'ChangeQuantityModalController',
+                controllerAs: 'vm',
+                templateUrl: 'components/inventory/inventory.change-quantity.tpl.html',
+                values: { item: item }
+            }).show().then(newCount => {
+                item.count = newCount;
             });
         }
     }
