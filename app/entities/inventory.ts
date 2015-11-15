@@ -1,6 +1,9 @@
 module Entities {
     import OwnedWeapon = Entities.Weapons.OwnedWeapon;
     import Amount = Finance.Amount;
+    import SkillModifierDto = CharacterBuilder.Inventory.SkillModifierDto;
+    import AbilityModifierDto = CharacterBuilder.Inventory.AbilityModifierDto;
+    import fromSkillModifierDto = CharacterBuilder.Inventory.fromSkillModifierDto;
 
     export class Inventory {
         private _items: Item[];
@@ -41,20 +44,29 @@ module Entities {
 
         public get items(): Item[] {
             return this._items.slice(); // Defensive copy
-        };
+        }
 
         public addItem(item: Item) {
             this.dto.items.push(item.dto);
             this._items.push(item);
             item.addCountUpdateListener(item => this.onCountUpdate(item));
         }
+
+        public get skillModifiers(): SkillModifier[] {
+            var modifiers: SkillModifier[] = [];
+            return [].concat.apply([], this._items.map(item => item.skillModifiers)); // flatMap
+        }
     }
 
 
     export class Item {
         private countUpdateListeners: ItemListener[] = [];
+        private _skillModifiers: SkillModifier[] = [];
 
         constructor(public dto: ItemDto) {
+            if (dto.skillModifiers) {
+                this._skillModifiers = dto.skillModifiers.map(fromSkillModifierDto);
+            }
         }
 
         public get name(): string {
@@ -77,6 +89,10 @@ module Entities {
         public addCountUpdateListener(listener: ItemListener) {
             this.countUpdateListeners.push(listener);
         }
+
+        public get skillModifiers(): SkillModifier[] {
+            return this._skillModifiers.slice(); // Defensive copy
+        }
     }
 
     type ItemListener = (item: Item) => void;
@@ -85,6 +101,8 @@ module Entities {
         name: string;
         weight: number;
         count: number;
+        skillModifiers?: SkillModifierDto[];
+        abilityModifiers?: AbilityModifierDto[];
     }
 
     export interface InventoryDto {
