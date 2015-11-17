@@ -1,4 +1,4 @@
-module CharacterBuilder.Inventory {
+module Entities {
     import SkillModifier = Entities.SkillModifier;
     import ModificationInProgress = Entities.ModificationInProgress;
 

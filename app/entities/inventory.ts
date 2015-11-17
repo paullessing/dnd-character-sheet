@@ -1,9 +1,11 @@
+/// <reference path="modifier.ts" />
+
 module Entities {
     import OwnedWeapon = Entities.Weapons.OwnedWeapon;
     import Amount = Finance.Amount;
-    import SkillModifierDto = CharacterBuilder.Inventory.SkillModifierDto;
-    import AbilityModifierDto = CharacterBuilder.Inventory.AbilityModifierDto;
-    import fromSkillModifierDto = CharacterBuilder.Inventory.fromSkillModifierDto;
+    import SkillModifierDto = Entities.SkillModifierDto;
+    import AbilityModifierDto = Entities.AbilityModifierDto;
+    import fromSkillModifierDto = Entities.fromSkillModifierDto;
 
     export class Inventory {
         private _items: Item[];

@@ -1,0 +1,23 @@
+.o-close-button {
+	position: absolute;
+	display: block;
+	top: 0;
+	right: 0;
+	width: 40px;
+	height: 40px;
+	text-indent: 9999px;
+	overflow: hidden;
+
+	&:after {
+		text-indent: 0;
+		position: absolute;
+		@include fill-parent;
+		content: 'X'; // TODO use fontawesome
+		color: black;
+		font-weight: bold;
+		font-size: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}

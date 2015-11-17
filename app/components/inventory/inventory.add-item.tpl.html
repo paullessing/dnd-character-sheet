@@ -1,22 +1,19 @@
-<div style="width: 250px; height: 200px; font-size: 20px;">
-    <h2>{{ vm.isEdit ? 'Edit' : 'Create New' }} Item</h2>
-    <a ng-click="vm.close()">Close</a>
+<form class="c-add-item-form" novalidate ng-submit="vm.submit()">
+    <h2 class="c-add-item-form__title">Create New Item</h2>
+    <a ng-click="vm.close()" class="o-close-button">Close</a>
 
-    <div>
-        <label>
-            Name: <input type="text" ng-model="vm.item.name" />
-        </label>
-    </div>
-    <div>
-        <label>
-            Quantity: <input type="number" ng-model="vm.item.count" min="1" step="1" />
-        </label>
-    </div>
-    <div>
-        <label>
-            weight: <input type="number" ng-model="vm.item.weight"  min="0" step="0.01" />
-        </label>
-    </div>
+    <label class="o-inline-field">
+        <span class="o-inline-field__label">Name</span>
+        <input class="o-inline-field__field" type="text" ng-model="vm.item.name" />
+    </label>
+    <label class="o-inline-field">
+        <span class="o-inline-field__label">Quantity</span>
+        <input class="o-inline-field__field" type="number" ng-model="vm.item.count" min="1" step="1" />
+    </label>
+    <label class="o-inline-field">
+        <span class="o-inline-field__label">Weight</span>
+        <input class="o-inline-field__field" type="number" ng-model="vm.item.weight"  min="0" step="0.01" />
+    </label>
 
     <button ng-click="vm.submit()">Submit</button>
-</div>
+</form>
