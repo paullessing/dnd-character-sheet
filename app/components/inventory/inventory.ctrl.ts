@@ -13,6 +13,7 @@ module CharacterBuilder.Inventory {
     import ModalWindowService = CharacterBuilder.Modal.ModalWindowService;
     import AddItemModalController = CharacterBuilder.Modal.AddItemModalController;
     import ChangeQuantityModalController = CharacterBuilder.Modal.ChangeQuantityModalController;
+    import OwnedItem = Entities.OwnedItem;
 
     export class InventoryDirectiveController {
         public character: Character;
@@ -24,7 +25,7 @@ module CharacterBuilder.Inventory {
                 controller: AddItemModalController,
                 controllerAs: 'vm',
                 templateUrl: 'components/inventory/inventory.add-item.tpl.html'
-            }).show().then((item: Item) => {
+            }).show().then((item: OwnedItem) => {
                 this.character.inventory.addItem(item);
                 console.log("Done");
             }, () => {
@@ -32,7 +33,7 @@ module CharacterBuilder.Inventory {
             });
         }
 
-        public editCount(item: Item) {
+        public editCount(item: OwnedItem) {
             this.modalWindowService.createModal<number>({
                 controller: ChangeQuantityModalController,
                 controllerAs: 'vm',

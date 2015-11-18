@@ -1,8 +1,8 @@
 module Entities {
-    import SkillModifier = Entities.SkillModifier;
+    import AbilityModifier = Entities.AbilityModifier;
     import ModificationInProgress = Entities.ModificationInProgress;
 
-    export function fromSkillModifierDto(dto: SkillModifierDto): SkillModifier {
+    export function fromModifierDto(dto: ModifierDto): AbilityModifier {
         var apply: (m: ModificationInProgress) => void;
         if (dto.isProficiencyModifier) {
             var stackProficiency = dto.canStackProficiency;
@@ -23,16 +23,11 @@ module Entities {
         }
     }
 
-    export interface SkillModifierDto {
+    export interface ModifierDto {
         isProficiencyModifier?: boolean;
         canStackProficiency?: boolean;
         ability: string;
-        skill: string;
+        skill?: string;
         amount?: number;
-    }
-
-    export interface AbilityModifierDto {
-        ability: string;
-        amount: number;
     }
 }

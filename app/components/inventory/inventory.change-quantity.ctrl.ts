@@ -2,10 +2,10 @@
 
 module CharacterBuilder.Modal {
     import ItemDto = Entities.ItemDto;
-    import Item = Entities.Item;
+    import OwnedItem = Entities.OwnedItem;
     export class ChangeQuantityModalController {
 
-        public item: Item;
+        public item: OwnedItem;
         public count: number;
 
         static $inject = ['modalWindow', 'modalWindowValues'];

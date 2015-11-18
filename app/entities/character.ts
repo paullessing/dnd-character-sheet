@@ -23,8 +23,13 @@ module Entities {
             this._details = new CharacterDetails(this.dto.details);
             this._personality = new Personality(this.dto.personality);
             this._abilities = new Abilities(this.dto.abilities, () => this.proficiencyBonus);
-            this._inventory = new Inventory(this.dto.inventory);
+            this._inventory = new Inventory(this.dto.inventory, () => this.onModifiersChanged());
+            this.onModifiersChanged();
             this.xp = this.dto.xp; // Ensure complex setter is called
+        }
+
+        private onModifiersChanged() {
+            this._abilities.setModifiers(this._inventory.skillModifiers);
         }
 
         public getDto() {

@@ -1,26 +1,42 @@
-/// <reference path="../../entities/inventory.ts" />
+/// <reference path="../../entities/item.ts"/>
 
 module CharacterBuilder.Modal {
-    import ItemDto = Entities.ItemDto;
-    import Item = Entities.Item;
+    import OwnedItem = Entities.OwnedItem;
+    import OwnedItemDto = Entities.OwnedItemDto;
+    import ModifierDto = Entities.ModifierDto;
+
     export class AddItemModalController {
 
-        public item: ItemDto = {
+        public modifiers: ModifierDto[] = [];
+
+        public item = {
             name: null,
-            weight: null,
-            count: 1
-        };
+            weight: 0,
+            count: 1,
+            modifiers: []
+        }
 
         static $inject = ['modalWindow'];
-        constructor(private modalWindow: ModalWindow<Item>) {
+        constructor(private modalWindow: ModalWindow<OwnedItem>) {
         }
 
         public submit() {
-            this.modalWindow.complete(new Item(this.item));
+            this.modalWindow.complete(new OwnedItem({
+                itemDto: {
+                    name: this.item.name,
+                    weight: this.item.weight,
+                    modifiers: this.item.modifiers
+                },
+                count: this.item.count
+            }));
         }
 
         public close() {
             this.modalWindow.abort();
+        }
+
+        public addModifier(modifier: ModifierDto) {
+            this.item.modifiers.push(modifier);
         }
     }
 

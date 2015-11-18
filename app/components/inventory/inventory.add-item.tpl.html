@@ -15,5 +15,12 @@
         <input class="o-inline-field__field" type="number" ng-model="vm.item.weight"  min="0" step="0.01" />
     </label>
 
+    <div ng-repeat="modifier in vm.item.modifiers">
+        <span ng-if="modifier.isProficiencyModifier">{{ modifier.canStackProficiency ? 'Adds' : 'Gives' }} proficiency in</span>
+        {{ modifier.skill || modifier.ability }}
+        <span ng-if="modifier.amount">{{ modifier.amount | modifier }}</span>
+    </div>
+    <modifier-form on-complete="vm.addModifier(modifier)"></modifier-form>
+
     <button ng-click="vm.submit()">Submit</button>
 </form>
