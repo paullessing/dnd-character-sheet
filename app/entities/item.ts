@@ -22,37 +22,9 @@ module Entities {
         }
     }
 
-    type OwnedItemListener = (item: OwnedItem) => void;
-
     export interface ItemDto {
         name: string;
         weight: number;
         modifiers?: ModifierDto[];
-    }
-
-    export class OwnedItem extends Item {
-        private countUpdateListeners: OwnedItemListener[] = [];
-
-        constructor(public _dto: OwnedItemDto) {
-            super(_dto.itemDto);
-        }
-
-        public get count(): number {
-            return this._dto.count;
-        }
-
-        public set count(count: number) {
-            this._dto.count = Math.max(count, 0);
-            this.countUpdateListeners.forEach(listener => listener(this));
-        }
-
-        public addCountUpdateListener(listener: OwnedItemListener) {
-            this.countUpdateListeners.push(listener);
-        }
-    }
-
-    export interface OwnedItemDto {
-        itemDto: ItemDto;
-        count: number;
     }
 }

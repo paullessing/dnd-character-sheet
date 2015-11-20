@@ -8,29 +8,26 @@ module Entities {
     import fromModifierDto = Entities.fromModifierDto;
 
     export class Inventory {
-        private _items: OwnedItem[];
+        private _items: InventoryItem[];
 
         constructor(private dto: InventoryDto, private onModifiersChanged: () => void) {
-            this._items = (dto.items = dto.items || []).map(itemDto => {
-                var item = new OwnedItem(itemDto);
-                item.addCountUpdateListener(item => this.onCountUpdate(item));
-                return item;
-            });
+            this._items = (dto.items = dto.items || []).map(itemDto => new InventoryItem(itemDto));
             if (!dto.wallet) {
                 dto.wallet = {};
             }
         }
 
-        private onCountUpdate(item: OwnedItem) {
-            if (item.count > 0) {
-                return;
-            }
-            var index = this._items.indexOf(item);
+        public updateCount(inventoryItem: InventoryItem, count: number) {
+            var index = this._items.indexOf(inventoryItem);
             if (index >= 0) {
-                this._items.splice(index, 1);
-                this.dto.items.splice(index, 1);
-                if (item.modifiers && item.modifiers.length) {
-                    this.onModifiersChanged();
+                if (count <= 0) {
+                    this._items.splice(index, 1);
+                    this.dto.items.splice(index, 1);
+                    if (inventoryItem.item.modifiers && inventoryItem.item.modifiers.length) {
+                        this.onModifiersChanged();
+                    }
+                } else {
+                    this.dto.items[index].count = count;
                 }
             }
         }
@@ -47,14 +44,18 @@ module Entities {
 
         public weapons: OwnedWeapon[] = [];
 
-        public get items(): Item[] {
+        public get items(): InventoryItem[] {
             return this._items.slice(); // Defensive copy
         }
 
-        public addItem(item: OwnedItem) {
-            this.dto.items.push(item._dto);
-            this._items.push(item);
-            item.addCountUpdateListener(item => this.onCountUpdate(item));
+        public addItem(item: Item, count: number) {
+            var dto: InventoryItemDto = {
+                itemDto: item.dto,
+                count: count
+            };
+            var inventoryItem = new InventoryItem(dto)
+            this.dto.items.push(dto);
+            this._items.push(inventoryItem);
             if (item.modifiers && item.modifiers.length) {
                 this.onModifiersChanged(); // TODO investigate the flux pattern
             }
@@ -62,12 +63,33 @@ module Entities {
 
         public get skillModifiers(): AbilityModifier[] {
             var modifiers: AbilityModifier[] = [];
-            return [].concat.apply([], this._items.map(item => item.modifiers)); // flatMap
+            return [].concat.apply([], this._items.map(inventoryItem => inventoryItem.item.modifiers)); // flatMap
         }
     }
 
     export interface InventoryDto {
-        items?: OwnedItemDto[];
+        items?: InventoryItemDto[];
         wallet?: Amount;
+    }
+
+    export class InventoryItem {
+        private _item: Item;
+
+        constructor(public dto: InventoryItemDto) {
+            this._item = new Item(dto.itemDto);
+        }
+
+        public get count(): number {
+            return this.dto.count;
+        }
+
+        public get item(): Item {
+            return this._item;
+        }
+    }
+
+    export interface InventoryItemDto {
+        itemDto: ItemDto;
+        count: number;
     }
 }

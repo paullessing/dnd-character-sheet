@@ -2,8 +2,8 @@
     <labelled-box label="Inventory">
         <button ng-click="vm.openAddItem()">Add Item</button>
         <ol>
-            <li ng-repeat="item in vm.character.inventory.items">
-                {{ item.name }} &times;<a ng-click="vm.editCount(item)">{{ item.count }}</a> @{{ item.weight }}lb
+            <li ng-repeat="inventoryItem in vm.character.inventory.items">
+                {{ inventoryItem.item.name }} &times;<a ng-click="vm.editCount(inventoryItem)">{{ inventoryItem.count }}</a> @{{ inventoryItem.item.weight }}lb
             </li>
         </ol>
     </labelled-box>

@@ -1,17 +1,20 @@
+/// <reference path="../../entities/item.ts" />
 /// <reference path="../../entities/inventory.ts" />
 
 module CharacterBuilder.Modal {
     import ItemDto = Entities.ItemDto;
-    import OwnedItem = Entities.OwnedItem;
+    import InventoryItem = Entities.InventoryItem;
+    import Item = Entities.Item;
     export class ChangeQuantityModalController {
 
-        public item: OwnedItem;
+        public item: Item;
         public count: number;
 
         static $inject = ['modalWindow', 'modalWindowValues'];
         constructor(private modalWindow: ModalWindow<number>, modalWindowValues: any) {
-            this.item = modalWindowValues.item;
-            this.count = this.item.count;
+            var inventoryItem = modalWindowValues.item;
+            this.item = inventoryItem.item;
+            this.count = inventoryItem.count;
         }
 
         public submit() {
